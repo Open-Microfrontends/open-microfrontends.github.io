@@ -1,0 +1,25 @@
+site_name: Open Microfrontends
+site_url: https://www.open-microfrontends.org/
+theme:
+  name: material
+  palette:
+  # Palette toggle for light mode
+  - media: "(prefers-color-scheme: light)"
+    scheme: default
+    toggle:
+      icon: material/brightness-7
+      name: Switch to dark mode
+
+  # Palette toggle for dark mode
+  - media: "(prefers-color-scheme: dark)"
+    scheme: slate
+    toggle:
+      icon: material/brightness-4
+      name: Switch to light mode
+markdown_extensions:
+- admonition
+extra:
+  social:
+  - icon: fontawesome/brands/github
+    link: https://github.com/Open-Microfrontends/open-microfrontends
+copyright: Copyright &copy; OpenMicrofrontends Contributers
