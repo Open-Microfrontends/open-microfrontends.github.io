@@ -1,4 +1,4 @@
-# Open Microfrontend Homepage
+# Open Microfrontends Homepage
 
 Based on [Material for MkDocs](https://squidfunk.github.io/mkdocs-material)
 
