@@ -1,11 +1,22 @@
 site_name: Open Microfrontends
 site_url: https://www.open-microfrontends.org/
+nav:
+- Introduction: index.md
+- Description:
+  - Overview: description/overview.md
+- OpenMicrofrontends Generator:
+  - Quickstart: generator/quickstart.md
+- Implementation Hints:
+  - Application Host: implementation-hints/application-host.md
 theme:
   name: material
+  logo: assets/logo.svg
   palette:
   # Palette toggle for light mode
   - media: "(prefers-color-scheme: light)"
     scheme: default
+    primary: custom
+    accent: custom
     toggle:
       icon: material/brightness-7
       name: Switch to dark mode
@@ -13,11 +24,16 @@ theme:
   # Palette toggle for dark mode
   - media: "(prefers-color-scheme: dark)"
     scheme: slate
+    primary: custom
+    accent: custom
     toggle:
       icon: material/brightness-4
       name: Switch to light mode
   features:
   - navigation.footer
+  - navigation.sections
+extra_css:
+- stylesheets/extra.css
 markdown_extensions:
 - attr_list
 - md_in_html
@@ -30,6 +46,7 @@ markdown_extensions:
 - pymdownx.snippets
 - pymdownx.superfences
 extra:
+  generator: false
   social:
   - icon: fontawesome/brands/github
     link: https://github.com/Open-Microfrontends/open-microfrontends
