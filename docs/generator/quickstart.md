@@ -1,4 +1,0 @@
-
-# OpenMicrofrontends Generator Quickstart
-
-TODO

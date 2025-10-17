@@ -2,12 +2,15 @@ site_name: Open Microfrontends
 site_url: https://www.open-microfrontends.org/
 nav:
 - Introduction: index.md
-- Description:
-  - Overview: description/overview.md
+- Example: example.md
+- Descriptions:
+  - Overview: descriptions/index.md
 - OpenMicrofrontends Generator:
-  - Quickstart: generator/quickstart.md
+  - Quickstart: generator/index.md
 - Implementation Hints:
-  - Application Host: implementation-hints/application-host.md
+  - Overview: implementation-hints/index.md
+  - Microfrontends: implementation-hints/microfrontends.md
+  - Application Hosts: implementation-hints/application-hosts.md
 theme:
   name: material
   logo: assets/logo.svg

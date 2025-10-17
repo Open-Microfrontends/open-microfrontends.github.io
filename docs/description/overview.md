@@ -1,4 +1,0 @@
-
-# OpenMicrofrontends Description Overview
-
-TODO
