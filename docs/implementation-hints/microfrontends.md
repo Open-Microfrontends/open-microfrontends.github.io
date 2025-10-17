@@ -1,4 +1,11 @@
 
-# Micorfrontend Implementation Hints
+# Micorfrontend Development Hints
 
-TODO: importmap (shared modules), render function, routing, ssr 
+## Export the Render Function
+
+## Shared Vendor Libraries (importmap)
+
+## Browser Routing 
+
+## Server-Side Rendering
+
