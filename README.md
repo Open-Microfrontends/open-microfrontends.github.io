@@ -14,4 +14,4 @@ Or with brew on macOS:
 
 ### Start server
 
-    mkdocs serve
+    mkdocs serve --livereload

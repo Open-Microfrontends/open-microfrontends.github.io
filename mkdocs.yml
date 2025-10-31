@@ -1,19 +1,20 @@
 site_name: Open Microfrontends
 site_url: https://www.open-microfrontends.org/
 nav:
-- Introduction: index.md
-- Example: example.md
-- Descriptions:
-  - Overview: descriptions/index.md
-- OpenMicrofrontends Generator:
-  - Quickstart: generator/index.md
+- Home: index.md
+- Terminology: terminology.md
+- Getting Started: getting-started.md
+- Spec and JSON Schema: spec-schema.md
+- Descriptions: descriptions.md
+- OpenMicrofrontends Generator: generator.md
 - Implementation Hints:
-  - Overview: implementation-hints/index.md
+  - Implementation Hints: implementation-hints/index.md
   - Microfrontends: implementation-hints/microfrontends.md
   - Application Hosts: implementation-hints/application-hosts.md
 theme:
   name: material
   logo: assets/logo.svg
+  favicon: assets/favicon.png
   palette:
   # Palette toggle for light mode
   - media: "(prefers-color-scheme: light)"

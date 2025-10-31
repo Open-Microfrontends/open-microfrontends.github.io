@@ -12,8 +12,9 @@
 ## Loading JS assets 
 
 
-## Modules and importmap 
+## Modules and importMap 
 
+imagemaps kollisonen
 
 ## Browser Caching
 
