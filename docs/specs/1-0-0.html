@@ -1,3 +1,1528 @@
+<html lang="en" dir="ltr"><head>
+<meta charset="utf-8">
+<meta name="generator" content="ReSpec 35.6.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<style>
+dfn{cursor:pointer}
+.dfn-panel{position:absolute;z-index:35;min-width:300px;max-width:500px;padding:.5em .75em;margin-top:.6em;font-family:"Helvetica Neue",sans-serif;font-size:small;background:#fff;background:var(--indextable-hover-bg,#fff);color:#000;color:var(--text,#000);box-shadow:0 1em 3em -.4em rgba(0,0,0,.3),0 0 1px 1px rgba(0,0,0,.05);box-shadow:0 1em 3em -.4em var(--tocsidebar-shadow,rgba(0,0,0,.3)),0 0 1px 1px var(--tocsidebar-shadow,rgba(0,0,0,.05));border-radius:2px}
+.dfn-panel:not(.docked)>.caret{position:absolute;top:-9px}
+.dfn-panel:not(.docked)>.caret::after,.dfn-panel:not(.docked)>.caret::before{content:"";position:absolute;border:10px solid transparent;border-top:0;border-bottom:10px solid #fff;border-bottom-color:var(--indextable-hover-bg,#fff);top:0}
+.dfn-panel:not(.docked)>.caret::before{border-bottom:9px solid #a2a9b1;border-bottom-color:var(--indextable-hover-bg,#a2a9b1)}
+.dfn-panel *{margin:0}
+.dfn-panel b{display:block;color:#000;color:var(--text,#000);margin-top:.25em}
+.dfn-panel ul a[href]{color:#333;color:var(--text,#333)}
+.dfn-panel>div{display:flex}
+.dfn-panel a.self-link{font-weight:700;margin-right:auto}
+.dfn-panel .marker{padding:.1em;margin-left:.5em;border-radius:.2em;text-align:center;white-space:nowrap;font-size:90%;color:#040b1c}
+.dfn-panel .marker.dfn-exported{background:#d1edfd;box-shadow:0 0 0 .125em #1ca5f940}
+.dfn-panel .marker.idl-block{background:#8ccbf2;box-shadow:0 0 0 .125em #0670b161}
+.dfn-panel a:not(:hover){text-decoration:none!important;border-bottom:none!important}
+.dfn-panel a[href]:hover{border-bottom-width:1px}
+.dfn-panel ul{padding:0}
+.dfn-panel li{margin-left:1em}
+.dfn-panel.docked{position:fixed;left:.5em;top:unset;bottom:2em;margin:0 auto;max-width:calc(100vw - .75em * 2 - .5em - .2em * 2);max-height:30vh;overflow:auto}
+</style>
 
-TODO
+<title>OpenMicrofrontends Specification 1.0.0</title>
 
+
+<script>
+    const respecConfig = {
+        specStatus: "base",
+        shortName: "OMS",
+        historyURI: null,
+        latestVersion: null,
+        thisVersion: "https://www.open-microfrontends.org/specs/1.0.0.html",
+        canonicalURI: "https://www.open-microfrontends.org/specs/1.0.0.html",
+        editors: [{ 
+            name: "Daniel Schwarz", url: "https://github.com/DanielMathis" 
+        }, { 
+            name: "David Strohmaier", url: "https://github.com/davidst2017"
+        }, { 
+            name: "Jürgen Kofler", url: "https://github.com/nonblocking", company: "nonblocking.at gmbh" 
+        }, {
+            name: "Vladimir Nisevic", url: "https://github.com/niv0" 
+        }],
+        format: "markdown",
+    }
+</script>
+
+<style id="respec-mainstyle">
+@keyframes pop{
+0%{transform:scale(1,1)}
+25%{transform:scale(1.25,1.25);opacity:.75}
+100%{transform:scale(1,1)}
+}
+a.internalDFN{color:inherit;border-bottom:1px solid #99c;text-decoration:none}
+a.externalDFN{color:inherit;border-bottom:1px dotted #ccc;text-decoration:none}
+a.bibref{text-decoration:none}
+.respec-offending-element:target{animation:pop .25s ease-in-out 0s 1}
+.respec-offending-element,a[href].respec-offending-element{text-decoration:red wavy underline}
+@supports not (text-decoration:red wavy underline){
+.respec-offending-element:not(pre){display:inline-block}
+.respec-offending-element{background:url(data:image/gif;base64,R0lGODdhBAADAPEAANv///8AAP///wAAACwAAAAABAADAEACBZQjmIAFADs=) bottom repeat-x}
+}
+#references :target{background:#eaf3ff;animation:pop .4s ease-in-out 0s 1}
+cite .bibref{font-style:italic}
+a[href].orcid{padding-left:4px;padding-right:4px}
+a[href].orcid>svg{margin-bottom:-2px}
+ol.tof,ul.tof{list-style:none outside none}
+.caption{margin-top:.5em;font-style:italic}
+#issue-summary>ul{column-count:2}
+#issue-summary li{list-style:none;display:inline-block}
+details.respec-tests-details{margin-left:1em;display:inline-block;vertical-align:top}
+details.respec-tests-details>*{padding-right:2em}
+details.respec-tests-details[open]{z-index:999999;position:absolute;border:thin solid #cad3e2;border-radius:.3em;background-color:#fff;padding-bottom:.5em}
+details.respec-tests-details[open]>summary{border-bottom:thin solid #cad3e2;padding-left:1em;margin-bottom:1em;line-height:2em}
+details.respec-tests-details>ul{width:100%;margin-top:-.3em}
+details.respec-tests-details>li{padding-left:1em}
+.self-link:hover{opacity:1;text-decoration:none;background-color:transparent}
+aside.example .marker>a.self-link{color:inherit}
+.header-wrapper{display:flex;align-items:baseline}
+:is(h2,h3,h4,h5,h6):not(#toc>h2,#abstract>h2,#sotd>h2,.head>h2){position:relative;left:-.5em}
+:is(h2,h3,h4,h5,h6):not(#toch2)+a.self-link{color:inherit;order:-1;position:relative;left:-1.1em;font-size:1rem;opacity:.5}
+:is(h2,h3,h4,h5,h6)+a.self-link::before{content:"§";text-decoration:none;color:var(--heading-text)}
+:is(h2,h3)+a.self-link{top:-.2em}
+:is(h4,h5,h6)+a.self-link::before{color:#000}
+@media (max-width:767px){
+dd{margin-left:0}
+}
+@media print{
+.removeOnSave{display:none}
+}
+</style>
+<meta name="color-scheme" content="light">
+<meta name="description" content="Then OpenMicrofrontends project aims to provide a formal specification for Microfrontends provided by a server. Think of it as OpenAPI for Microfrontends.
+
+This specification defines how to describe, serve, and interact with Microfrontends in a standardized way.
+
+The specification makes it possible to decouple Microfrontend development from their integration and to treat Microfrontends exactly like 
+Microservices with only a different formal description.">
+<link rel="canonical" href="https://www.open-microfrontends.org/specs/1.0.0.html">
+<style>
+.hljs{--base:#fafafa;--mono-1:#383a42;--mono-2:#686b77;--mono-3:#717277;--hue-1:#0b76c5;--hue-2:#336ae3;--hue-3:#a626a4;--hue-4:#42803c;--hue-5:#ca4706;--hue-5-2:#c91243;--hue-6:#986801;--hue-6-2:#9a6a01}
+@media (prefers-color-scheme:dark){
+.hljs{--base:#282c34;--mono-1:#abb2bf;--mono-2:#818896;--mono-3:#5c6370;--hue-1:#56b6c2;--hue-2:#61aeee;--hue-3:#c678dd;--hue-4:#98c379;--hue-5:#e06c75;--hue-5-2:#be5046;--hue-6:#d19a66;--hue-6-2:#e6c07b}
+}
+.hljs{display:block;overflow-x:auto;padding:.5em;color:#383a42;color:var(--mono-1,#383a42);background:#fafafa;background:var(--base,#fafafa)}
+.hljs-comment,.hljs-quote{color:#717277;color:var(--mono-3,#717277);font-style:italic}
+.hljs-doctag,.hljs-formula,.hljs-keyword{color:#a626a4;color:var(--hue-3,#a626a4)}
+.hljs-deletion,.hljs-name,.hljs-section,.hljs-selector-tag,.hljs-subst{color:#ca4706;color:var(--hue-5,#ca4706);font-weight:700}
+.hljs-literal{color:#0b76c5;color:var(--hue-1,#0b76c5)}
+.hljs-addition,.hljs-attribute,.hljs-meta-string,.hljs-regexp,.hljs-string{color:#42803c;color:var(--hue-4,#42803c)}
+.hljs-built_in,.hljs-class .hljs-title{color:#9a6a01;color:var(--hue-6-2,#9a6a01)}
+.hljs-attr,.hljs-number,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-pseudo,.hljs-template-variable,.hljs-type,.hljs-variable{color:#986801;color:var(--hue-6,#986801)}
+.hljs-bullet,.hljs-link,.hljs-meta,.hljs-selector-id,.hljs-symbol,.hljs-title{color:#336ae3;color:var(--hue-2,#336ae3)}
+.hljs-emphasis{font-style:italic}
+.hljs-strong{font-weight:700}
+.hljs-link{text-decoration:underline}
+</style>
+<style>
+var:hover{text-decoration:underline;cursor:pointer}
+var.respec-hl{color:var(--color,#000);background-color:var(--bg-color);box-shadow:0 0 0 2px var(--bg-color)}
+@media (prefers-color-scheme:dark){
+var.respec-hl{filter:saturate(.9) brightness(.9)}
+}
+var.respec-hl-c1{--bg-color:#f4d200}
+var.respec-hl-c2{--bg-color:#ff87a2}
+var.respec-hl-c3{--bg-color:#96e885}
+var.respec-hl-c4{--bg-color:#3eeed2}
+var.respec-hl-c5{--bg-color:#eacfb6}
+var.respec-hl-c6{--bg-color:#82ddff}
+var.respec-hl-c7{--bg-color:#ffbcf2}
+@media print{
+var.respec-hl{background:0 0;color:#000;box-shadow:unset}
+}
+</style>
+<style>
+var{position:relative;cursor:pointer}
+var[data-type]::after,var[data-type]::before{position:absolute;left:50%;top:-6px;opacity:0;transition:opacity .4s;pointer-events:none}
+var[data-type]::before{content:"";transform:translateX(-50%);border-width:4px 6px 0 6px;border-style:solid;border-color:transparent;border-top-color:#222}
+var[data-type]::after{content:attr(data-type);transform:translateX(-50%) translateY(-100%);background:#222;text-align:center;font-family:"Dank Mono","Fira Code",monospace;font-style:normal;padding:6px;border-radius:3px;color:#daca88;text-indent:0;font-weight:400}
+var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
+</style>
+<script id="initialUserConfig" type="application/json">{
+  "specStatus": "base",
+  "shortName": "OMS",
+  "historyURI": null,
+  "latestVersion": null,
+  "thisVersion": "https://www.open-microfrontends.org/specs/1.0.0.html",
+  "canonicalURI": "https://www.open-microfrontends.org/specs/1.0.0.html",
+  "editors": [
+    {
+      "name": "Daniel Schwarz",
+      "url": "https://github.com/DanielMathis"
+    },
+    {
+      "name": "David Strohmaier",
+      "url": "https://github.com/davidst2017"
+    },
+    {
+      "name": "Jürgen Kofler",
+      "url": "https://github.com/nonblocking",
+      "company": "nonblocking.at gmbh"
+    },
+    {
+      "name": "Vladimir Nisevic",
+      "url": "https://github.com/niv0"
+    }
+  ],
+  "format": "markdown",
+  "publishISODate": "2025-11-06T00:00:00.000Z",
+  "generatedSubtitle": "06 November 2025"
+}</script>
+<link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/base.css"></head>    
+<body class="h-entry"><div class="head">
+    
+    <h1 id="title" class="title">OpenMicrofrontends Specification 1.0.0</h1> 
+    <p id="w3c-state"> <time class="dt-published" datetime="2025-11-06">06 November 2025</time></p>
+    <details open="">
+      <summary>More details about this document</summary>
+      <dl>
+        <dt>This version:</dt><dd>
+                <a class="u-url" href="https://www.open-microfrontends.org/specs/1.0.0.html">https://www.open-microfrontends.org/specs/1.0.0.html</a>
+              </dd>
+        <dt>Latest published version:</dt><dd>
+                none
+              </dd>
+        
+        
+        
+        
+        
+        
+        
+        <dt>Editors:</dt><dd class="editor p-author h-card vcard">
+    <a class="u-url url p-name fn" href="https://github.com/DanielMathis">Daniel Schwarz</a>
+  </dd><dd class="editor p-author h-card vcard">
+    <a class="u-url url p-name fn" href="https://github.com/davidst2017">David Strohmaier</a>
+  </dd><dd class="editor p-author h-card vcard">
+    <a class="u-url url p-name fn" href="https://github.com/nonblocking">Jürgen Kofler</a> (<span class="p-org org h-org">nonblocking.at gmbh</span>)
+  </dd><dd class="editor p-author h-card vcard">
+    <a class="u-url url p-name fn" href="https://github.com/niv0">Vladimir Nisevic</a>
+  </dd>
+        
+        
+        
+        
+        
+      </dl>
+    </details>
+    
+    
+    <p class="copyright">
+    © OpenMicrofrontends Contributors.
+</p>
+    <hr title="Separator for header">
+  </div>
+
+<section id="abstract" class="introductory"><h2>Abstract</h2>
+
+
+<p>Then <em>OpenMicrofrontends</em> project aims to provide a formal specification for <em>Microfrontends</em> provided by a server. Think of it as <em>OpenAPI</em> for Microfrontends.
+<br><br>
+This specification defines how to describe, serve, and interact with <em>Microfrontends</em> in a standardized way.
+<br><br>
+The specification makes it possible to decouple <em>Microfrontend</em> development from their integration and to treat <em>Microfrontends</em> exactly like 
+<em>Microservices</em> with only a different formal description.</p>
+</section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Abstract</a></li><li class="tocline"><a class="tocxref" href="#conformance"><bdi class="secno">1. </bdi>Conformance</a></li><li class="tocline"><a class="tocxref" href="#openmicrofrontends-specification-1-0-0"><bdi class="secno">2. </bdi>OpenMicrofrontends Specification 1.0.0</a></li><li class="tocline"><a class="tocxref" href="#why-microfrontends"><bdi class="secno">3. </bdi>Why Microfrontends</a></li><li class="tocline"><a class="tocxref" href="#introduction"><bdi class="secno">4. </bdi>Introduction</a></li><li class="tocline"><a class="tocxref" href="#terminology"><bdi class="secno">5. </bdi>Terminology</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#component-overview"><bdi class="secno">5.1 </bdi>Component Overview</a></li><li class="tocline"><a class="tocxref" href="#microfrontend"><bdi class="secno">5.2 </bdi>Microfrontend</a></li><li class="tocline"><a class="tocxref" href="#microfrontend-server"><bdi class="secno">5.3 </bdi>Microfrontend Server</a></li><li class="tocline"><a class="tocxref" href="#host-application"><bdi class="secno">5.4 </bdi>Host Application</a></li><li class="tocline"><a class="tocxref" href="#host-backend"><bdi class="secno">5.5 </bdi>Host Backend</a></li><li class="tocline"><a class="tocxref" href="#host-frontend"><bdi class="secno">5.6 </bdi>Host Frontend</a></li><li class="tocline"><a class="tocxref" href="#backend-api"><bdi class="secno">5.7 </bdi>Backend API</a></li><li class="tocline"><a class="tocxref" href="#backend-for-frontend-bff"><bdi class="secno">5.8 </bdi>Backend for Frontend (BFF)</a></li><li class="tocline"><a class="tocxref" href="#openmicrofrontends-specification"><bdi class="secno">5.9 </bdi>OpenMicrofrontends Specification</a></li><li class="tocline"><a class="tocxref" href="#openmicrofrontends-description"><bdi class="secno">5.10 </bdi>OpenMicrofrontends Description</a></li><li class="tocline"><a class="tocxref" href="#openmicrofrontends-renderer"><bdi class="secno">5.11 </bdi>OpenMicrofrontends Renderer</a></li><li class="tocline"><a class="tocxref" href="#openmicrofrontends-server-side-renderer"><bdi class="secno">5.12 </bdi>OpenMicrofrontends Server-Side Renderer</a></li><li class="tocline"><a class="tocxref" href="#host-frontend-starter"><bdi class="secno">5.13 </bdi>Host Frontend Starter</a></li><li class="tocline"><a class="tocxref" href="#host-backend-integration"><bdi class="secno">5.14 </bdi>Host Backend Integration</a></li></ol></li><li class="tocline"><a class="tocxref" href="#specification"><bdi class="secno">6. </bdi>Specification</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#versions"><bdi class="secno">6.1 </bdi>Versions</a></li><li class="tocline"><a class="tocxref" href="#openmicrofrontend-description-structure"><bdi class="secno">6.2 </bdi>OpenMicrofrontend Description Structure</a></li><li class="tocline"><a class="tocxref" href="#minimal-description-example"><bdi class="secno">6.3 </bdi>Minimal Description Example</a></li><li class="tocline"><a class="tocxref" href="#schema"><bdi class="secno">6.4 </bdi>Schema</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#openmicrofrontends-object"><bdi class="secno">6.4.1 </bdi>OpenMicrofrontends Object</a></li><li class="tocline"><a class="tocxref" href="#info-object"><bdi class="secno">6.4.2 </bdi>Info Object</a></li><li class="tocline"><a class="tocxref" href="#contact-object"><bdi class="secno">6.4.3 </bdi>Contact Object</a></li><li class="tocline"><a class="tocxref" href="#server-object"><bdi class="secno">6.4.4 </bdi>Server Object</a></li><li class="tocline"><a class="tocxref" href="#securityscheme-object"><bdi class="secno">6.4.5 </bdi>SecurityScheme Object</a></li><li class="tocline"><a class="tocxref" href="#microfrontend-object"><bdi class="secno">6.4.6 </bdi>Microfrontend Object</a></li><li class="tocline"><a class="tocxref" href="#multilanguagetext-object"><bdi class="secno">6.4.7 </bdi>MultiLanguageText Object</a></li><li class="tocline"><a class="tocxref" href="#userpermissions-object"><bdi class="secno">6.4.8 </bdi>UserPermissions Object</a></li><li class="tocline"><a class="tocxref" href="#userpermissionkey-object"><bdi class="secno">6.4.9 </bdi>UserPermissionKey Object</a></li><li class="tocline"><a class="tocxref" href="#userpermissionsprovider-object"><bdi class="secno">6.4.10 </bdi>UserPermissionsProvider Object</a></li><li class="tocline"><a class="tocxref" href="#assets-object"><bdi class="secno">6.4.11 </bdi>Assets Object</a></li><li class="tocline"><a class="tocxref" href="#jsassets-object"><bdi class="secno">6.4.12 </bdi>JSAssets Object</a></li><li class="tocline"><a class="tocxref" href="#importmap-object"><bdi class="secno">6.4.13 </bdi>ImportMap Object</a></li><li class="tocline"><a class="tocxref" href="#ssr-object"><bdi class="secno">6.4.14 </bdi>SSR Object</a></li><li class="tocline"><a class="tocxref" href="#apiproxy-object"><bdi class="secno">6.4.15 </bdi>APIProxy Object</a></li><li class="tocline"><a class="tocxref" href="#apiproxytarget-object"><bdi class="secno">6.4.16 </bdi>APIProxyTarget Object</a></li><li class="tocline"><a class="tocxref" href="#config-object"><bdi class="secno">6.4.17 </bdi>Config Object</a></li><li class="tocline"><a class="tocxref" href="#message-object"><bdi class="secno">6.4.18 </bdi>Message Object</a></li><li class="tocline"><a class="tocxref" href="#annotations-object"><bdi class="secno">6.4.19 </bdi>Annotations Object</a></li></ol></li><li class="tocline"><a class="tocxref" href="#openmicrofrontends-renderer-signature"><bdi class="secno">6.5 </bdi>OpenMicrofrontends Renderer Signature</a></li><li class="tocline"><a class="tocxref" href="#openmicrofrontends-server-side-renderer-signature"><bdi class="secno">6.6 </bdi>OpenMicrofrontends Server-Side Renderer Signature</a></li></ol></li><li class="tocline"><a class="tocxref" href="#implementation-hints"><bdi class="secno">7. </bdi>Implementation Hints</a></li><li class="tocline"><a class="tocxref" href="#full-example"><bdi class="secno">8. </bdi>Full Example</a></li><li class="tocline"><a class="tocxref" href="#json-schema"><bdi class="secno">9. </bdi>JSON Schema</a></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">A. </bdi>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#normative-references"><bdi class="secno">A.1 </bdi>Normative references</a></li></ol></li></ol></nav>
+
+<section id="conformance"><div class="header-wrapper"><h2 id="x1-conformance"><bdi class="secno">1. </bdi>Conformance</h2><a class="self-link" href="#conformance" aria-label="Permalink for Section 1."></a></div><p>As well as sections marked as non-normative, all authoring guidelines, diagrams, examples, and notes in this specification are non-normative. Everything else in this specification is normative.</p><p>
+        The key words <em class="rfc2119">MAY</em>, <em class="rfc2119">MUST</em>, <em class="rfc2119">MUST NOT</em>, <em class="rfc2119">OPTIONAL</em>, <em class="rfc2119">RECOMMENDED</em>, <em class="rfc2119">REQUIRED</em>, <em class="rfc2119">SHALL</em>, <em class="rfc2119">SHOULD</em>, and <em class="rfc2119">SHOULD NOT</em> in this document
+        are to be interpreted as described in
+        <a href="https://www.rfc-editor.org/info/bcp14">BCP 14</a>
+        [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc2119" title="Key words for use in RFCs to Indicate Requirement Levels">RFC2119</a></cite>] [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8174" title="Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words">RFC8174</a></cite>]
+        when, and only when, they appear in all
+        capitals, as shown here.
+      </p>
+
+
+  
+
+
+</section>
+
+
+<section id="openmicrofrontends-specification-1-0-0"><div class="header-wrapper"><h2 id="x2-openmicrofrontends-specification-1-0-0"><bdi class="secno">2. </bdi>OpenMicrofrontends Specification 1.0.0</h2><a class="self-link" href="#openmicrofrontends-specification-1-0-0" aria-label="Permalink for Section 2."></a></div>
+</section><section id="why-microfrontends"><div class="header-wrapper"><h2 id="x3-why-microfrontends"><bdi class="secno">3. </bdi>Why Microfrontends</h2><a class="self-link" href="#why-microfrontends" aria-label="Permalink for Section 3."></a></div>
+<p>With <em>Microfrontends</em>, developers can build and deploy components independently, allowing for greater flexibility and scalability in web application development.</p>
+</section><section id="introduction"><div class="header-wrapper"><h2 id="x4-introduction"><bdi class="secno">4. </bdi>Introduction</h2><a class="self-link" href="#introduction" aria-label="Permalink for Section 4."></a></div>
+<p>The <em>OpenMicrofrontends</em> project aims to provide a formal specification for <em>Microfrontends</em> provided by a server. Think of it as <a href="https://www.openapis.org">OpenAPI</a> for Microfrontends.</p>
+<p>This specification defines how to describe, serve, and interact with <em>Microfrontends</em> in a standardized way.</p>
+<p>The specification includes:</p>
+<ul>
+<li>Basic metadata like name, title, description</li>
+<li>The assets (js, css) and where to find them</li>
+<li>The schema of the config object that can be provided when starting the Microfrontend</li>
+<li>The schema of messages the Microfrontend sends and receives (pub/sub)</li>
+<li>API proxies that are required to access (protected) backends</li>
+<li>Security hints</li>
+</ul>
+<p>The specification makes it possible to decouple <em>Microfrontend</em> development from their integration into applications, and to treat <em>Microfrontends</em> exactly like <em>Microservices</em>
+with only a different formal description.</p>
+</section><section id="terminology"><div class="header-wrapper"><h2 id="x5-terminology"><bdi class="secno">5. </bdi>Terminology</h2><a class="self-link" href="#terminology" aria-label="Permalink for Section 5."></a></div>
+<p>Terminology overview and used component names in the specification.</p>
+<section id="component-overview"><div class="header-wrapper"><h3 id="x5-1-component-overview"><bdi class="secno">5.1 </bdi>Component Overview</h3><a class="self-link" href="#component-overview" aria-label="Permalink for Section 5.1"></a></div>
+<p>A complete setup with <em>Host Backend</em> integration looks like this: </p>
+<p><img src="assets/components.png" alt="Components"></p>
+<p>If the <em>Microfrontends</em> do not require a <em>Host Backend</em> integration (everything is publicly available, no security, no proxying required, no SSR),
+here a simplified, <em>Browser Standalone</em>, setup:</p>
+<p><img src="assets/components-browser-standalone.png" alt="Browser Standalone Components"></p>
+</section><section id="microfrontend"><div class="header-wrapper"><h3 id="x5-2-microfrontend"><bdi class="secno">5.2 </bdi>Microfrontend</h3><a class="self-link" href="#microfrontend" aria-label="Permalink for Section 5.2"></a></div>
+<p>A Microfrontend is a JavaScript frontend bundled into JS and CSS files.</p>
+<p>It <em class="rfc2119">MUST</em> be possible to start the Microfrontend within an arbitrary DOM element.</p>
+<p>A Microfrontend <em class="rfc2119">SHOULD NOT</em> affect anything outside that host element, in particular:</p>
+<ul>
+<li>It <em class="rfc2119">SHOULD</em> use CSS selectors that specifically target elements within the Microfrontend</li>
+<li>It <em class="rfc2119">SHOULD NOT</em> install any global libraries like polyfills</li>
+</ul>
+<p>A Microfrontend <em class="rfc2119">SHOULD</em> be themable and provide a way to align the Look&amp;Feel to the Host Application.</p>
+<p>A Microfrontend <em class="rfc2119">MAY</em> support Server-Side Rendering (SSR).</p>
+<p>A Microfrontend <em class="rfc2119">MAY</em> receive a config object during startup, and it <em class="rfc2119">MAY</em> support asynchronous, pub/sub-based, communication with other Microfrontends on the same page.</p>
+<p>A Microfrontend <em class="rfc2119">MAY</em> use Backend APIs to send and receive data.</p>
+<p>A Microfrontend <em class="rfc2119">MAY</em> share common libraries and code with other Microfrontends and the Host Application.</p>
+</section><section id="microfrontend-server"><div class="header-wrapper"><h3 id="x5-3-microfrontend-server"><bdi class="secno">5.3 </bdi>Microfrontend Server</h3><a class="self-link" href="#microfrontend-server" aria-label="Permalink for Section 5.3"></a></div>
+<p>A Microfrontend Server serves the Microfrontend assets, according to the OpenMicrofrontend Description.</p>
+<p>A Microfrontend Server <em class="rfc2119">SHOULD</em> expose the OpenMicrofrontend Description (microfrontends.yaml or microfrontends.json), 
+so Host Applications can dynamically register Microfrontends and react to changes after new deployments.</p>
+<p>A Microfrontend Server <em class="rfc2119">MAY</em> provide a route for server-side rendering.</p>
+<p>A Microfrontend Server <em class="rfc2119">MAY</em> provide an internal Backend API, commonly referred to as a Backend For Frontend (BFF).</p>
+</section><section id="host-application"><div class="header-wrapper"><h3 id="x5-4-host-application"><bdi class="secno">5.4 </bdi>Host Application</h3><a class="self-link" href="#host-application" aria-label="Permalink for Section 5.4"></a></div>
+<p>A Host Application is any Web Application that hosts one or more Microfrontends.</p>
+<p>It can be built in arbitrary frontend and backend technologies, such as Express.js with a template engine, Next.js, PHP, ASP.NET, Java Servlet, or Spring WebMVC.
+It its simplest form, it could be a simple single-page application (SPA) without a dedicated backend if the Microfrontends don't need security or proxying of Backend APIs.</p>
+</section><section id="host-backend"><div class="header-wrapper"><h3 id="x5-5-host-backend"><bdi class="secno">5.5 </bdi>Host Backend</h3><a class="self-link" href="#host-backend" aria-label="Permalink for Section 5.5"></a></div>
+<p>The backend part of the Host Application, which can be used to provide security, proxying of Backend APIs and Server-Side Rendering (SSR).</p>
+</section><section id="host-frontend"><div class="header-wrapper"><h3 id="x5-6-host-frontend"><bdi class="secno">5.6 </bdi>Host Frontend</h3><a class="self-link" href="#host-frontend" aria-label="Permalink for Section 5.6"></a></div>
+<p>The frontend part of the Host Application, which is used to start Microfrontends and provide means to interact with them.</p>
+</section><section id="backend-api"><div class="header-wrapper"><h3 id="x5-7-backend-api"><bdi class="secno">5.7 </bdi>Backend API</h3><a class="self-link" href="#backend-api" aria-label="Permalink for Section 5.7"></a></div>
+<p>The API Microfrontends use to fetch data or perform actions. This can be a REST API, GraphQL, or any other type of API that Microfrontends need to function correctly.</p>
+</section><section id="backend-for-frontend-bff"><div class="header-wrapper"><h3 id="x5-8-backend-for-frontend-bff"><bdi class="secno">5.8 </bdi>Backend for Frontend (BFF)</h3><a class="self-link" href="#backend-for-frontend-bff" aria-label="Permalink for Section 5.8"></a></div>
+<p>A Backend API which runs on Microfrontend Server and is only used internally by Microfrontends hosted there.</p>
+</section><section id="openmicrofrontends-specification"><div class="header-wrapper"><h3 id="x5-9-openmicrofrontends-specification"><bdi class="secno">5.9 </bdi>OpenMicrofrontends Specification</h3><a class="self-link" href="#openmicrofrontends-specification" aria-label="Permalink for Section 5.9"></a></div>
+<p>A Meta Specification to describe Microfrontends and how to load and interact with them, i.e., this document.</p>
+</section><section id="openmicrofrontends-description"><div class="header-wrapper"><h3 id="x5-10-openmicrofrontends-description"><bdi class="secno">5.10 </bdi>OpenMicrofrontends Description</h3><a class="self-link" href="#openmicrofrontends-description" aria-label="Permalink for Section 5.10"></a></div>
+<p>A formal description of a set of Microfrontends on a Microfrontend Server based on this Specification.</p>
+<p>It is used to generate type-safe Renderers, Starters, and Host Backend Integrations.</p>
+</section><section id="openmicrofrontends-renderer"><div class="header-wrapper"><h3 id="x5-11-openmicrofrontends-renderer"><bdi class="secno">5.11 </bdi>OpenMicrofrontends Renderer</h3><a class="self-link" href="#openmicrofrontends-renderer" aria-label="Permalink for Section 5.11"></a></div>
+<p>A JavaScript function with a specified signature that needs to be implemented by the Microfrontend, so it can be loaded by OpenMicrofrontends compatible Host Applications.</p>
+<p>The function <em class="rfc2119">MUST</em> conform to the signature described in this Specification document.</p>
+<p>A generator (such as <a href="https://github.com/Open-Microfrontends/open-microfrontends-generator">OpenMicrofrontends Generator</a>) <em class="rfc2119">SHOULD</em> be used to create type-safe signatures based on a given OpenMicrofrontends Description.</p>
+</section><section id="openmicrofrontends-server-side-renderer-0"><div class="header-wrapper"><h3 id="openmicrofrontends-server-side-renderer"><bdi class="secno">5.12 </bdi>OpenMicrofrontends Server-Side Renderer</h3><a class="self-link" href="#openmicrofrontends-server-side-renderer" aria-label="Permalink for Section 5.12"></a></div><p>A server-side route with a specified interface that needs to be implemented by the Microfrontend, so a server-side rendered HTML can be fetched by OpenMicrofrontends compatible Host Applications.</p>
+<p>The function <em class="rfc2119">MUST</em> conform to the interface described in this Specification document.</p>
+<p>A generator (such as <a href="https://github.com/Open-Microfrontends/open-microfrontends-generator">OpenMicrofrontends Generator</a>) <em class="rfc2119">SHOULD</em> be used to create type-safe signatures based on a given OpenMicrofrontends Description.</p>
+</section><section id="host-frontend-starter"><div class="header-wrapper"><h3 id="x5-13-host-frontend-starter"><bdi class="secno">5.13 </bdi>Host Frontend Starter</h3><a class="self-link" href="#host-frontend-starter" aria-label="Permalink for Section 5.13"></a></div>
+<p>A function in the Host Frontend that starts Microfrontends.</p>
+<p>This function is not covered by this Specification, but is essential for integrating Microfrontends into the Host Application.</p>
+<p>A generator (such as <a href="https://github.com/Open-Microfrontends/open-microfrontends-generator">OpenMicrofrontends Generator</a>) <em class="rfc2119">SHOULD</em> be used to create type-safe starters based on a given OpenMicrofrontends Description.</p>
+</section><section id="host-backend-integration"><div class="header-wrapper"><h3 id="x5-14-host-backend-integration"><bdi class="secno">5.14 </bdi>Host Backend Integration</h3><a class="self-link" href="#host-backend-integration" aria-label="Permalink for Section 5.14"></a></div>
+<p>Host Backend components for security, proxying, SSR, etc. used to provide the necessary infrastructure for Microfrontends to interact with backend services in a secure and efficient way.</p>
+<p>This integration is not covered by this Specification and might work differently for different backend technologies.</p>
+<p>A generator (such as <a href="https://github.com/Open-Microfrontends/open-microfrontends-generator">OpenMicrofrontends Generator</a>) <em class="rfc2119">SHOULD</em> be used to create type-safe backend integrations based on a given OpenMicrofrontends Description.</p>
+</section></section><section id="specification"><div class="header-wrapper"><h2 id="x6-specification"><bdi class="secno">6. </bdi>Specification</h2><a class="self-link" href="#specification" aria-label="Permalink for Section 6."></a></div>
+<section id="versions"><div class="header-wrapper"><h3 id="x6-1-versions"><bdi class="secno">6.1 </bdi>Versions</h3><a class="self-link" href="#versions" aria-label="Permalink for Section 6.1"></a></div>
+<p>The OpenMicrofrontend Specification is versioned using a <em>major.minor.patch</em> versioning scheme. The <em>major.minor</em> portion of the version string (for example, 1.0) <em class="rfc2119">SHALL</em> designate the Specification feature set. 
+<em>.patch</em> versions address errors in, or provide clarifications to, this document, not the feature set. 
+Tooling which supports Specification 1.1 <em class="rfc2119">SHOULD</em> be compatible with all OMS 1.1.* versions. 
+The patch version <em class="rfc2119">SHOULD NOT</em> be considered by tooling, making no distinction between 1.1.0 and 1.1.1 for example.</p>
+</section><section id="openmicrofrontend-description-structure"><div class="header-wrapper"><h3 id="x6-2-openmicrofrontend-description-structure"><bdi class="secno">6.2 </bdi>OpenMicrofrontend Description Structure</h3><a class="self-link" href="#openmicrofrontend-description-structure" aria-label="Permalink for Section 6.2"></a></div>
+<p>An OpenMicrofrontend Description <em class="rfc2119">MAY</em> be made up of a single JSON or YAML document, or it <em class="rfc2119">MAY</em> be divided into multiple, connected parts at the author’s discretion. 
+In the latter case, <a href="https://spec.openapis.org/oas/v3.1.2.html#security-scheme-object">Schema Object</a> <em>$ref</em> fields are used to identify the referenced elements.</p>
+<p>Host Applications <em class="rfc2119">MAY</em> ignore referenced schema objects and only process the main document.</p>
+</section><section id="minimal-description-example"><div class="header-wrapper"><h3 id="x6-3-minimal-description-example"><bdi class="secno">6.3 </bdi>Minimal Description Example</h3><a class="self-link" href="#minimal-description-example" aria-label="Permalink for Section 6.3"></a></div>
+<pre><code class="yaml hljs" aria-busy="false"><span class="hljs-attr">openMicrofrontends:</span> <span class="hljs-number">1.0</span><span class="hljs-number">.0</span>
+<span class="hljs-attr">microfrontends:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">My</span> <span class="hljs-string">First</span> <span class="hljs-string">Microfrontend</span>
+    <span class="hljs-attr">assets:</span>
+      <span class="hljs-attr">initial:</span>
+        <span class="hljs-attr">js:</span>
+          <span class="hljs-bullet">-</span> <span class="hljs-string">app.js</span>
+    <span class="hljs-attr">rendererFunctionName:</span> <span class="hljs-string">startMyFirstMicrofrontend</span>
+</code></pre>
+</section><section id="schema"><div class="header-wrapper"><h3 id="x6-4-schema"><bdi class="secno">6.4 </bdi>Schema</h3><a class="self-link" href="#schema" aria-label="Permalink for Section 6.4"></a></div>
+<section id="openmicrofrontends-object"><div class="header-wrapper"><h4 id="x6-4-1-openmicrofrontends-object"><bdi class="secno">6.4.1 </bdi>OpenMicrofrontends Object</h4><a class="self-link" href="#openmicrofrontends-object" aria-label="Permalink for Section 6.4.1"></a></div>
+<p>The root object of the OpenMicrofrontends Description.</p>
+<p>Fields:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Field Name</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">openMicrofrontends</td>
+<td align="left">string</td>
+<td align="left"><em class="rfc2119">REQUIRED</em>. This string <em class="rfc2119">MUST</em> be the version number of the OpenMicrofrontend Specification the document uses. <br>The <em>openMicrofrontends</em> field <em class="rfc2119">SHOULD</em> be used by tooling to interpret the document.</td>
+</tr>
+<tr>
+<td align="left">info</td>
+<td align="left"><a href="#info-object">Info Object</a></td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. Provides metadata about the Microfrontends. The metadata <em class="rfc2119">MAY</em> be used by tooling as required.</td>
+</tr>
+<tr>
+<td align="left">servers</td>
+<td align="left"><a href="#server-object">Server Object</a></td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. An array of Server Objects, which provide connectivity information to a target server.</td>
+</tr>
+<tr>
+<td align="left">securitySchemes</td>
+<td align="left">Map[string, <a href="#securityscheme-object">SecurityScheme Object</a>]</td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. A declaration of security mechanisms, which <em class="rfc2119">MAY</em> be referenced across the OpenMicrofrontend Description.</td>
+</tr>
+<tr>
+<td align="left">microfrontends</td>
+<td align="left">[<a href="#microfrontend-object">Microfrontend Object</a>]</td>
+<td align="left"><em class="rfc2119">REQUIRED</em>. The list of exposed Microfrontends. At least one <em class="rfc2119">MUST</em> be given.</td>
+</tr>
+</tbody></table>
+</section><section id="info-object"><div class="header-wrapper"><h4 id="x6-4-2-info-object"><bdi class="secno">6.4.2 </bdi>Info Object</h4><a class="self-link" href="#info-object" aria-label="Permalink for Section 6.4.2"></a></div>
+<p>The Info Object provides metadata about the Microfrontends. The metadata <em class="rfc2119">MAY</em> be used by the clients if needed, and <em class="rfc2119">MAY</em> be presented in editing or documentation generation tools for convenience.</p>
+<p>Fields:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Field Name</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">title</td>
+<td align="left">string</td>
+<td align="left"><em class="rfc2119">REQUIRED</em>. The title of the OpenMicrofrontends Description.</td>
+</tr>
+<tr>
+<td align="left">description</td>
+<td align="left">string</td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. A description of the exposed Microfrontends</td>
+</tr>
+<tr>
+<td align="left">version</td>
+<td align="left">string</td>
+<td align="left"><em class="rfc2119">REQUIRED</em>. The version of the OpenMicrofrontends Description document</td>
+</tr>
+<tr>
+<td align="left">contact</td>
+<td align="left"><a href="#contact-object">Contact Object</a></td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. Contact information for the exposed OpenMicrofrontends Description</td>
+</tr>
+</tbody></table>
+<p>Example:</p>
+<pre><code class="yaml hljs" aria-busy="false"><span class="hljs-attr">title:</span> <span class="hljs-string">OpenMicrofrontends</span> <span class="hljs-string">Example</span>
+<span class="hljs-attr">description:</span> <span class="hljs-string">Example</span> <span class="hljs-string">Microfrontends</span>
+<span class="hljs-attr">version:</span> <span class="hljs-number">1.0</span><span class="hljs-number">.0</span>
+<span class="hljs-attr">contact:</span>
+  <span class="hljs-attr">author:</span> <span class="hljs-string">OpenMicrofrontends</span>
+  <span class="hljs-attr">email:</span> <span class="hljs-string">test@test.com</span>
+  <span class="hljs-attr">organization:</span> <span class="hljs-string">OpenMicrofrontends</span> 
+</code></pre>
+</section><section id="contact-object"><div class="header-wrapper"><h4 id="x6-4-3-contact-object"><bdi class="secno">6.4.3 </bdi>Contact Object</h4><a class="self-link" href="#contact-object" aria-label="Permalink for Section 6.4.3"></a></div>
+<p>Contact information for the exposed Microfrontends.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Field Name</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">author</td>
+<td align="left">string</td>
+<td align="left"><em class="rfc2119">REQUIRED</em>. The identifying name of the contact person/organization.</td>
+</tr>
+<tr>
+<td align="left">email</td>
+<td align="left">string</td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. The URI for the contact information. This <em class="rfc2119">MUST</em> be in the form of a URI.</td>
+</tr>
+<tr>
+<td align="left">organization</td>
+<td align="left">string</td>
+<td align="left"><em class="rfc2119">REQUIRED</em>. The email address of the contact person/organization. This <em class="rfc2119">MUST</em> be in the form of an email address.</td>
+</tr>
+</tbody></table>
+<p>Example:</p>
+<pre><code class="yaml hljs" aria-busy="false"><span class="hljs-attr">author:</span> <span class="hljs-string">The</span> <span class="hljs-string">Author</span>
+<span class="hljs-attr">email:</span> <span class="hljs-string">test@test.com</span>
+<span class="hljs-attr">organization:</span> <span class="hljs-string">The</span> <span class="hljs-string">Organization</span>
+</code></pre>
+</section><section id="server-object"><div class="header-wrapper"><h4 id="x6-4-4-server-object"><bdi class="secno">6.4.4 </bdi>Server Object</h4><a class="self-link" href="#server-object" aria-label="Permalink for Section 6.4.4"></a></div>
+<p>The Server Object describes a single Microfrontend Server.</p>
+<p>Fields:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Field Name</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">url</td>
+<td align="left">string</td>
+<td align="left"><em class="rfc2119">REQUIRED</em>. A URL to the Microfrontend Server host.</td>
+</tr>
+<tr>
+<td align="left">description</td>
+<td align="left">string</td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. Description of the host.</td>
+</tr>
+</tbody></table>
+<p>Example:</p>
+<pre><code class="yaml hljs" aria-busy="false"><span class="hljs-attr">url:</span> <span class="hljs-string">http://my-test-server.com</span>
+<span class="hljs-attr">description:</span> <span class="hljs-string">Test</span> <span class="hljs-string">Server</span>
+</code></pre>
+</section><section id="securityscheme-object"><div class="header-wrapper"><h4 id="x6-4-5-securityscheme-object"><bdi class="secno">6.4.5 </bdi>SecurityScheme Object</h4><a class="self-link" href="#securityscheme-object" aria-label="Permalink for Section 6.4.5"></a></div>
+<p>The SecurityScheme Object defines a reusable security scheme, which <em class="rfc2119">MAY</em> be used throughout the specification wherever applicable.</p>
+<p>It is derived from the <a href="https://spec.openapis.org/oas/v3.1.2.html#security-scheme-object">Security Scheme Object as defined by OpenAPI</a> and <em class="rfc2119">MUST</em> be interpreted as per OpenAPI’s definition.</p>
+<p>Example:</p>
+<pre><code class="yaml hljs" aria-busy="false"><span class="hljs-attr">ApiKeyAuth:</span>
+  <span class="hljs-attr">type:</span> <span class="hljs-string">apiKey</span>
+  <span class="hljs-attr">in:</span> <span class="hljs-string">header</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">X-API-Key</span>
+</code></pre>
+</section><section id="microfrontend-object"><div class="header-wrapper"><h4 id="x6-4-6-microfrontend-object"><bdi class="secno">6.4.6 </bdi>Microfrontend Object</h4><a class="self-link" href="#microfrontend-object" aria-label="Permalink for Section 6.4.6"></a></div>
+<table>
+<thead>
+<tr>
+<th align="left">Field Name</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">name</td>
+<td align="left">string</td>
+<td align="left"><em class="rfc2119">REQUIRED</em>. The identifying name of the Microfrontend</td>
+</tr>
+<tr>
+<td align="left">title</td>
+<td align="left">string | <a href="#multilanguagetext-object">MultiLanguageText Object</a></td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. A single- or multi-language title, which <em class="rfc2119">MAY</em> be used as a representative title of this Microfrontend to the end-user</td>
+</tr>
+<tr>
+<td align="left">description</td>
+<td align="left">string</td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. A human-readable description, which provides additional information and context about this Microfrontend</td>
+</tr>
+<tr>
+<td align="left">assets</td>
+<td align="left">[<a href="#assets-object">Assets Object</a>]</td>
+<td align="left"><em class="rfc2119">REQUIRED</em>. Defines all static assets of this Microfrontend, which have to be loaded and are needed to correctly display it in the browser</td>
+</tr>
+<tr>
+<td align="left">ssr</td>
+<td align="left"><a href="#ssr-object">SSR Object</a></td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. Defines whether and how server-side and hybrid rendering are supported by the Microfrontend</td>
+</tr>
+<tr>
+<td align="left">userPermissions</td>
+<td align="left"><a href="#userpermissions-object">UserPermissions Object</a></td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. Defines user permissions used by the Microfrontend</td>
+</tr>
+<tr>
+<td align="left">rendererFunctionName</td>
+<td align="left">string</td>
+<td align="left"><em class="rfc2119">REQUIRED</em>. Defines the name of the OpenMicrofrontend Renderer function</td>
+</tr>
+<tr>
+<td align="left">apiProxies</td>
+<td align="left"><a href="#apiproxy-object">ApiProxy Object</a></td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. Defines API services, which <em class="rfc2119">MAY</em> be consumed by the Microfrontend</td>
+</tr>
+<tr>
+<td align="left">config</td>
+<td align="left"><a href="#config-object">Config Object</a></td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. Defines the structure of the Microfrontend’s config object, which <em class="rfc2119">MUST</em> be passed to the Renderer</td>
+</tr>
+<tr>
+<td align="left">messages</td>
+<td align="left">Map[string, <a href="#message-object">Message Object</a>]</td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. Defines in- and outgoing messages for communicating with other Microfrontends or the Host Frontend in the browser</td>
+</tr>
+<tr>
+<td align="left">annotations</td>
+<td align="left"><a href="#annotations-object">Annotations Object</a></td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. Additional meta-data for the Microfrontend, which is not further defined by this specification, and <em class="rfc2119">MAY</em> be used for custom integrations</td>
+</tr>
+</tbody></table>
+</section><section id="multilanguagetext-object"><div class="header-wrapper"><h4 id="x6-4-7-multilanguagetext-object"><bdi class="secno">6.4.7 </bdi>MultiLanguageText Object</h4><a class="self-link" href="#multilanguagetext-object" aria-label="Permalink for Section 6.4.7"></a></div>
+<p>The MultiLanguageText Object maps a text from ISO 639 language codes to its corresponding translation.</p>
+<p>Example:</p>
+<pre><code class="yaml hljs" aria-busy="false"><span class="hljs-attr">en:</span> <span class="hljs-string">Hello</span> <span class="hljs-string">World</span>
+<span class="hljs-attr">de:</span> <span class="hljs-string">Hallo</span> <span class="hljs-string">Welt</span>
+<span class="hljs-attr">es:</span> <span class="hljs-string">Hola</span> <span class="hljs-string">Mundo</span>
+</code></pre>
+</section><section id="userpermissions-object"><div class="header-wrapper"><h4 id="x6-4-8-userpermissions-object"><bdi class="secno">6.4.8 </bdi>UserPermissions Object</h4><a class="self-link" href="#userpermissions-object" aria-label="Permalink for Section 6.4.8"></a></div>
+<p>The User Permissions object defines permission keys used by the Microfrontend to disable and hide components the user is not permitted to use.</p>
+<p>The Microfrontend <em class="rfc2119">MUST NOT</em> rely on those User Permissions to protect sensitive data or APIs from being called, because they can easily be changed in the browser. 
+But they <em class="rfc2119">SHOULD</em> match the authorization checks performed by the APIs.</p>
+<p>There are two ways to calculate the actual permissions for the Microfrontend:</p>
+<ol>
+<li>The Microfrontend Server provides a route to calculate the actual permissions based on some Authentication mechanism. </li>
+<li>The Host Application derives the permissions itself from user roles or user attributes.
+This might be the preferred way for <em>internal</em> Microfrontends in an enterprise environment, where Microfrontends are used in different contexts and the 
+actual authorization checks are performed by some backends.</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="left">Field Name</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">permissions</td>
+<td align="left">[<a href="#userpermissionkey-object">UserPermissionKey Object</a>]</td>
+<td align="left"><em class="rfc2119">REQUIRED</em>. A list of permission keys that <em class="rfc2119">MUST</em> be provided by the Host Application.</td>
+</tr>
+<tr>
+<td align="left">provided</td>
+<td align="left"><a href="#userpermissionsprovider-object">UserPermissionsProvider Object</a></td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. An endpoint on the Microfrontend Server that calculates the permissions for a given security content.</td>
+</tr>
+</tbody></table>
+<p>Example:</p>
+<pre><code class="yaml hljs" aria-busy="false"><span class="hljs-attr">permissions:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">showDetails</span>
+    <span class="hljs-attr">description:</span> <span class="hljs-string">User</span> <span class="hljs-string">is</span> <span class="hljs-string">permitted</span> <span class="hljs-string">to</span> <span class="hljs-string">see</span> <span class="hljs-string">details</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">deletePermitted</span>
+    <span class="hljs-attr">description:</span> <span class="hljs-string">User</span> <span class="hljs-string">is</span> <span class="hljs-string">permitted</span> <span class="hljs-string">to</span> <span class="hljs-string">delete</span> <span class="hljs-string">items</span>
+<span class="hljs-attr">provided:</span>
+  <span class="hljs-attr">path:</span> <span class="hljs-string">/permissions</span>
+<span class="hljs-attr">security:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">ApiKeyAuth:</span> [ ]
+</code></pre>
+</section><section id="userpermissionkey-object"><div class="header-wrapper"><h4 id="x6-4-9-userpermissionkey-object"><bdi class="secno">6.4.9 </bdi>UserPermissionKey Object</h4><a class="self-link" href="#userpermissionkey-object" aria-label="Permalink for Section 6.4.9"></a></div>
+<p>Defines a single user permission key.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Field Name</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">name</td>
+<td align="left">string</td>
+<td align="left"><em class="rfc2119">REQUIRED</em>. The name of the permission,</td>
+</tr>
+<tr>
+<td align="left">description</td>
+<td align="left">string</td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. An optional description.</td>
+</tr>
+</tbody></table>
+</section><section id="userpermissionsprovider-object"><div class="header-wrapper"><h4 id="x6-4-10-userpermissionsprovider-object"><bdi class="secno">6.4.10 </bdi>UserPermissionsProvider Object</h4><a class="self-link" href="#userpermissionsprovider-object" aria-label="Permalink for Section 6.4.10"></a></div>
+<p>Defines a Microfrontend Server route that can provide the User Permissions.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Field Name</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">path</td>
+<td align="left">Absolute path</td>
+<td align="left"><em class="rfc2119">REQUIRED</em>. The absolute path to the route on the Microfrontend Server. <br>A GET request to the route <em class="rfc2119">MUST</em> return a JSON object that contains all defined permissions with a boolean value.</td>
+</tr>
+<tr>
+<td align="left">security</td>
+<td align="left">[SecurityRequirement Object] as defined in the <a href="https://spec.openapis.org/oas/v3.1.2.html#security-requirement-object">OpenAPI Specification</a></td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. Defines the required security to access the endpoint.</td>
+</tr>
+</tbody></table>
+</section><section id="assets-object"><div class="header-wrapper"><h4 id="x6-4-11-assets-object"><bdi class="secno">6.4.11 </bdi>Assets Object</h4><a class="self-link" href="#assets-object" aria-label="Permalink for Section 6.4.11"></a></div>
+<p>The Assets Object defines static assets, which are provided by the Microfrontend Server and are necessary for correct browser rendering.</p>
+<ul>
+<li>At least one JavaScript asset <em class="rfc2119">MUST</em> be defined, which provides the OpenMicrofrontend Renderer of the Microfrontend.</li>
+<li>Microfrontends <em class="rfc2119">SHOULD</em> define a build manifest path. Build Manifests <em class="rfc2119">MUST</em> be served as either JSON or YAML. The JSON or YAML must contain a top-level property <em>version</em> or <em>timestamp</em>. 
+The Host Application <em class="rfc2119">SHOULD</em> use the <em>version</em> or <em>timestamp</em> for browser cache invalidation (e.g., by appending ?v=version to every delivered asset).</li>
+<li>Assets <em class="rfc2119">MUST</em> be served for HTTP GET requests</li>
+<li>The path to any asset <em class="rfc2119">MUST</em> be interpreted as relative to the Microfrontend Server URL (as listed in the top-level <em>servers</em>), and it must be combined with the <em>basePath</em>.</li>
+<li>Assets <em class="rfc2119">MUST</em> be relocatable, the Host Application <em class="rfc2119">MAY</em> serve them under another base path. So, all asset references within the initial assets <em class="rfc2119">MUST</em> be relative.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Field Name</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">basePath</td>
+<td align="left">Absolute path</td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. Base path to any asset defined in this section.  Defaults to “/”</td>
+</tr>
+<tr>
+<td align="left">js</td>
+<td align="left"><a href="#jsassets-object">JSAssets Object</a></td>
+<td align="left"><em class="rfc2119">REQUIRED</em>. Defines all JavaScript assets, which are <em class="rfc2119">REQUIRED</em> for initial rendering of the Microfrontend in the browser.</td>
+</tr>
+<tr>
+<td align="left">css</td>
+<td align="left">[Relative Path]</td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. Lists all required CSS assets as paths to their location.<br>The Host Application <em class="rfc2119">MUST</em> load all listed CSS files. The CSS stylesheets <em class="rfc2119">MUST</em> be attached to the HTML <em>head</em> in order of their appearance in this list.</td>
+</tr>
+<tr>
+<td align="left">buildManifestPath</td>
+<td align="left">Absolute Path</td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. Path to the build manifest of the Microfrontend.</td>
+</tr>
+</tbody></table>
+<p>Example:</p>
+<pre><code class="yaml hljs" aria-busy="false"><span class="hljs-attr">basePath:</span> <span class="hljs-string">/public</span>
+<span class="hljs-attr">buildManifest:</span> <span class="hljs-string">build.yaml</span>
+<span class="hljs-attr">js:</span>
+  <span class="hljs-attr">initial:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">scripts/index.js</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">scripts/utils.js</span>
+  <span class="hljs-attr">moduleSystem:</span> <span class="hljs-string">ESM</span>
+  <span class="hljs-attr">importMap:</span>
+    <span class="hljs-attr">imports:</span>
+      <span class="hljs-attr">externalModule1:</span> <span class="hljs-string">https://ga.jspm.io/npm:externalModule1@1.2.2/index.js</span>
+      <span class="hljs-attr">externalModule2:</span> <span class="hljs-string">https://ga.jspm.io/npm:externalModule2@5.1.8/index.js</span>
+<span class="hljs-attr">css:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">styles/colors.css</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">styles/layout.css</span>
+</code></pre>
+</section><section id="jsassets-object"><div class="header-wrapper"><h4 id="x6-4-12-jsassets-object"><bdi class="secno">6.4.12 </bdi>JSAssets Object</h4><a class="self-link" href="#jsassets-object" aria-label="Permalink for Section 6.4.12"></a></div>
+<p>The JS Assets object defines all JavaScript assets required to initially render a Microfrontend in the browser.</p>
+<p>If a module system is specified, all JavaScript assets <em class="rfc2119">MUST</em> adhere to this module system. By default, no module system is presumed.</p>
+<p>The listed JavaScript assets <em class="rfc2119">MUST</em> provide the OpenMicrofrontends Renderer of the Microfrontend. 
+If no module system is specified, the Renderer <em class="rfc2119">MUST</em> be attached to the global <em>window</em> object under the name, as defined in the Microfrontend’s <em>rendererFunctionName</em> property.</p>
+<p>Alternatively, if a module system is specified, one of the JavaScript assets <em class="rfc2119">MAY</em> <em>export</em> the OpenMicrofrontends Renderer either as </p>
+<ul>
+<li>a named export with the identifier <em>rendererFunctionName</em></li>
+<li>as property of the default export with the name <em>rendererFunctionName</em></li>
+</ul>
+<p>If a module system is used, an <em>importMap</em> <em class="rfc2119">MAY</em> be defined for resolving external (shared) module dependencies.
+The Host Application <em class="rfc2119">MUST</em> apply the <em>importMap</em> before loading the initial assets. It <em class="rfc2119">MUST</em> solve conflicting module references in different Microfrontends by defining <em>scopes</em>.</p>
+<p>An Host Application <em class="rfc2119">MAY</em> not support Microfrontends with the module system ESM and an <em>importMap</em>, because some browsers still do not support dynamically adding <em>importMaps</em>, which in turn 
+makes it impossible to dynamically load the Microfrontend.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Field Name</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">initial</td>
+<td align="left">[Relative Path]</td>
+<td align="left"><em class="rfc2119">REQUIRED</em>. Lists all required JavaScript assets (as paths) for initially rendering the Microfrontend. <br>The Host Frontend <em class="rfc2119">MUST</em> load all listed JavaScript assets. <br>The JavaScript assets <em class="rfc2119">MUST</em> be imported (or attached to the HTML head) in order of their appearance in this list.</td>
+</tr>
+<tr>
+<td align="left">moduleSystem</td>
+<td align="left">“ESM”  | “SystemJS” | “none”</td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. Defines the used module system. Defaults to <em>none</em>.</td>
+</tr>
+<tr>
+<td align="left">importMap</td>
+<td align="left"><a href="#importmap-object">ImportMap Object</a></td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. Defines an <em>importMap</em> which <em class="rfc2119">MUST</em> be applied by the Host Application so external module dependencies can be resolved</td>
+</tr>
+</tbody></table>
+</section><section id="importmap-object"><div class="header-wrapper"><h4 id="x6-4-13-importmap-object"><bdi class="secno">6.4.13 </bdi>ImportMap Object</h4><a class="self-link" href="#importmap-object" aria-label="Permalink for Section 6.4.13"></a></div>
+<p>The Import Map Object is based on the official JavaScript <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script/type/importmap">import map</a>. </p>
+<p>As of this version, the Import Map object supports only the <em>imports</em> property of JavaScript import maps.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Field Name</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">imports</td>
+<td align="left">Map[string, URL]</td>
+<td align="left"><em class="rfc2119">REQUIRED</em>. Defines for each external dependency its location as a URL.</td>
+</tr>
+</tbody></table>
+<p>Example:</p>
+<pre><code class="yaml hljs" aria-busy="false"><span class="hljs-attr">imports:</span>
+  <span class="hljs-attr">externalModule1:</span> <span class="hljs-string">https://ga.jspm.io/npm:externalModule1@1.2.2/index.js</span>
+  <span class="hljs-attr">externalModule2:</span> <span class="hljs-string">https://ga.jspm.io/npm:externalModule2@5.1.8/index.js</span>
+</code></pre>
+</section><section id="ssr-object"><div class="header-wrapper"><h4 id="x6-4-14-ssr-object"><bdi class="secno">6.4.14 </bdi>SSR Object</h4><a class="self-link" href="#ssr-object" aria-label="Permalink for Section 6.4.14"></a></div>
+<p>The SSR object provides information about server-side and hybrid rendering capabilities of a Microfrontend. 
+A Microfrontend <em class="rfc2119">MAY</em> offer SSR in addition to traditional client-side rendering.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Field Name</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">path</td>
+<td align="left">Absolute Path</td>
+<td align="left"><em class="rfc2119">REQUIRED</em>. An absolute path pointing to an endpoint on the Microfrontend Server for server-side rendering. <br>The endpoint <em class="rfc2119">MUST</em> serve HTTP POST requests for server-side rendering. <br>The actual request structure for the SSR endpoint is explained in more detail <a href="#openmicrofrontends-server-side-renderer">here</a>)</td>
+</tr>
+<tr>
+<td align="left">security</td>
+<td align="left">[SecurityRequirement Object] as defined in the <a href="https://spec.openapis.org/oas/v3.1.2.html#security-requirement-object">OpenAPI Specification</a></td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. Defines the required security to access the endpoint.</td>
+</tr>
+</tbody></table>
+<p>Example:</p>
+<pre><code class="yaml hljs" aria-busy="false"><span class="hljs-attr">path:</span> <span class="hljs-string">/ssr</span>
+<span class="hljs-attr">security:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">ApiKeyAuth:</span> []
+</code></pre>
+</section><section id="apiproxy-object"><div class="header-wrapper"><h4 id="x6-4-15-apiproxy-object"><bdi class="secno">6.4.15 </bdi>APIProxy Object</h4><a class="self-link" href="#apiproxy-object" aria-label="Permalink for Section 6.4.15"></a></div>
+<p>The API Proxy object defines a proxy to a backend API that <em class="rfc2119">MUST</em> be provided by the Host Application.
+A proxy is typically required when:</p>
+<ul>
+<li>The API is not publicly available</li>
+<li>The endpoint requires security measures the frontend cannot provide</li>
+<li>CORS problems want to be avoided</li>
+</ul>
+<p>Security schemes <em class="rfc2119">MAY</em> be used to describe security mechanisms of the API server.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Field Name</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">path</td>
+<td align="left">string</td>
+<td align="left"><em class="rfc2119">REQUIRED</em> if <em>targets</em> is not present. <br>A relative path to an API provided by the Microfrontend itself (a Backend-For-Frontend). <br>The Host Application <em class="rfc2119">MUST</em> prepend the Microfrontend base URL.</td>
+</tr>
+<tr>
+<td align="left">targets</td>
+<td align="left">[<a href="#apiproxytarget-object">APIProxyTarget Object</a>]</td>
+<td align="left"><em class="rfc2119">REQUIRED</em> if <em>path</em> is not present. A list of APIProxyTarget objects. <br>The list can be empty or incomplete. <br>The Host Application <em class="rfc2119">MUST</em> provide the correct URL.</td>
+</tr>
+<tr>
+<td align="left">security</td>
+<td align="left">[SecurityRequirement Object] as defined in the <a href="https://spec.openapis.org/oas/v3.1.2.html#security-requirement-object">OpenAPI Specification</a></td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. Defines the required security to access the endpoint.</td>
+</tr>
+</tbody></table>
+<p>Example:</p>
+<pre><code class="yaml hljs" aria-busy="false"><span class="hljs-attr">proxy1:</span>
+  <span class="hljs-attr">description:</span> <span class="hljs-string">Proxy</span> <span class="hljs-string">for</span> <span class="hljs-string">the</span> <span class="hljs-string">internal</span> <span class="hljs-string">BFF</span> <span class="hljs-string">API</span>
+  <span class="hljs-attr">path:</span> <span class="hljs-string">/api</span>
+  <span class="hljs-attr">security:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-attr">ApiKeyAuth:</span> []
+<span class="hljs-attr">proxy2:</span>
+  <span class="hljs-attr">description:</span> <span class="hljs-string">A</span> <span class="hljs-string">proxy</span> <span class="hljs-string">for</span> <span class="hljs-string">an</span> <span class="hljs-string">external</span> <span class="hljs-string">API</span>
+  <span class="hljs-attr">targets:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-attr">url:</span> <span class="hljs-string">https://localhost:1234/api</span>
+      <span class="hljs-attr">description:</span> <span class="hljs-string">Local</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-attr">url:</span> <span class="hljs-string">http://my-api.my-namespace:1234/api</span>
+      <span class="hljs-attr">description:</span> <span class="hljs-string">Test</span> <span class="hljs-string">environment</span>
+</code></pre>
+</section><section id="apiproxytarget-object"><div class="header-wrapper"><h4 id="x6-4-16-apiproxytarget-object"><bdi class="secno">6.4.16 </bdi>APIProxyTarget Object</h4><a class="self-link" href="#apiproxytarget-object" aria-label="Permalink for Section 6.4.16"></a></div>
+<p>Describes an API proxy target.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Field Name</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">url</td>
+<td align="left">string</td>
+<td align="left"><em class="rfc2119">REQUIRED</em>. A target URL</td>
+</tr>
+<tr>
+<td align="left">description</td>
+<td align="left">string</td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. A description of the target (e.g., the environment)</td>
+</tr>
+</tbody></table>
+</section><section id="config-object"><div class="header-wrapper"><h4 id="x6-4-17-config-object"><bdi class="secno">6.4.17 </bdi>Config Object</h4><a class="self-link" href="#config-object" aria-label="Permalink for Section 6.4.17"></a></div>
+<p>The Config Object defines the expected structure of the Microfrontend’s config.</p>
+<p>The structure of the config object <em class="rfc2119">MUST</em> be defined with JSON Schema (2020-12), and <em class="rfc2119">MUST</em> specify an object-type at its root.</p>
+<p>A default config <em class="rfc2119">MUST</em> be defined, and <em class="rfc2119">MUST</em> validate against the config structure.</p>
+<p>Host Applications <em class="rfc2119">MUST</em> supply the config to client-side and server-side Renderer functions, but <em class="rfc2119">MAY</em> use the default config (or parts of it). 
+Any config provided by the Host Application <em class="rfc2119">MUST</em> validate against the specified schema.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Field Name</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">schema</td>
+<td align="left">JSON Schema (2020-12)</td>
+<td align="left"><em class="rfc2119">REQUIRED</em>. Defines the expected structure of the config object</td>
+</tr>
+<tr>
+<td align="left">default</td>
+<td align="left">object</td>
+<td align="left"><em class="rfc2119">REQUIRED</em>. Defines the default value of the config.</td>
+</tr>
+</tbody></table>
+<p>Example:</p>
+<pre><code class="yaml hljs" aria-busy="false"><span class="hljs-attr">schema:</span>
+  <span class="hljs-attr">type:</span> <span class="hljs-string">object</span>
+  <span class="hljs-attr">properties:</span>
+    <span class="hljs-attr">customerId:</span>
+      <span class="hljs-attr">type:</span> <span class="hljs-string">string</span>
+  <span class="hljs-attr">required:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">customerId</span>
+  <span class="hljs-attr">additionalProperties:</span> <span class="hljs-literal">false</span>
+<span class="hljs-attr">default:</span>
+  <span class="hljs-attr">customerId:</span> <span class="hljs-string">'1000'</span>
+</code></pre>
+</section><section id="message-object"><div class="header-wrapper"><h4 id="x6-4-18-message-object"><bdi class="secno">6.4.18 </bdi>Message Object</h4><a class="self-link" href="#message-object" aria-label="Permalink for Section 6.4.18"></a></div>
+<p>The Message Object defines the structure of a single message, which <em class="rfc2119">MAY</em> be exchanged with other Microfrontends or with the Host Frontend in the browser.</p>
+<p>Messages <em class="rfc2119">MUST</em> be exchanged via publish/subscribe. A Microfrontend <em class="rfc2119">MAY</em> publish messages or subscribe to messages, or do both or none.</p>
+<p>The Host Frontend <em class="rfc2119">MUST</em> provide a publish/subscribe mechanism to the Microfrontend for exchanging messages.</p>
+<p>The validity of published messages <em class="rfc2119">MUST</em> be guaranteed by Microfrontends, i.e., any published message <em class="rfc2119">MUST</em> validate against its schema.</p>
+<p>The Host Frontend <em class="rfc2119">MAY</em> validate messages, and block them if validation fails. As this is <em class="rfc2119">OPTIONAL</em>, it is <em class="rfc2119">RECOMMENDED</em> that Microfrontends validate any incoming messages against their schema.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Field Name</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">schema</td>
+<td align="left">JSON Schema (2020-12)</td>
+<td align="left"><em class="rfc2119">REQUIRED</em>. Defines the expected structure of the message</td>
+</tr>
+<tr>
+<td align="left">publish</td>
+<td align="left">boolean</td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. Indicates whether the Microfrontend <em class="rfc2119">MAY</em> publish this message. Defaults to false</td>
+</tr>
+<tr>
+<td align="left">subscribe</td>
+<td align="left">boolean</td>
+<td align="left"><em class="rfc2119">OPTIONAL</em>. Indicates whether the Microfrontend <em class="rfc2119">MAY</em> subscribe to this message. Defaults to false</td>
+</tr>
+</tbody></table>
+<p>Example:</p>
+<pre><code class="yaml hljs" aria-busy="false"><span class="hljs-attr">ping:</span>
+  <span class="hljs-attr">publish:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">subscribe:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">schema:</span>
+    <span class="hljs-attr">type:</span> <span class="hljs-string">object</span>
+    <span class="hljs-attr">properties:</span>
+      <span class="hljs-attr">ping:</span>
+        <span class="hljs-attr">const:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-attr">required:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">ping</span>
+</code></pre>
+</section><section id="annotations-object"><div class="header-wrapper"><h4 id="x6-4-19-annotations-object"><bdi class="secno">6.4.19 </bdi>Annotations Object</h4><a class="self-link" href="#annotations-object" aria-label="Permalink for Section 6.4.19"></a></div>
+<p>An object with arbitrary meta-data that <em class="rfc2119">MAY</em> be used by tooling and Host Applications to gather additional information and enable capabilities outside this specification.</p>
+</section></section><section id="openmicrofrontends-renderer-signature"><div class="header-wrapper"><h3 id="x6-5-openmicrofrontends-renderer-signature"><bdi class="secno">6.5 </bdi>OpenMicrofrontends Renderer Signature</h3><a class="self-link" href="#openmicrofrontends-renderer-signature" aria-label="Permalink for Section 6.5"></a></div>
+<pre aria-busy="false"><code class="hljs javascript">type <span class="hljs-title class_">UndefinedToOptional</span> = {
+  [K <span class="hljs-keyword">in</span> keyof T <span class="hljs-keyword">as</span> T[K] <span class="hljs-keyword">extends</span> <span class="hljs-literal">undefined</span> ? never : K]: T[K];
+} &amp; <span class="hljs-title class_">Partial</span>;
+
+type <span class="hljs-title class_">MessageBus</span>&lt;
+  <span class="hljs-variable constant_">MESSAGES_PUBLISH</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Record</span> | <span class="hljs-literal">undefined</span>,
+  <span class="hljs-variable constant_">MESSAGES_SUBSCRIBE</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Record</span> | <span class="hljs-literal">undefined</span>
+&gt; = {
+  <span class="hljs-title function_">publish</span>(<span class="hljs-attr">topic</span>: T, <span class="hljs-attr">data</span>: <span class="hljs-variable constant_">MESSAGES_PUBLISH</span>[T]): <span class="hljs-keyword">void</span>;
+  <span class="hljs-title function_">subscribe</span>(<span class="hljs-attr">topic</span>: T, <span class="hljs-attr">cb</span>: <span class="hljs-function">(<span class="hljs-params">data: MESSAGES_SUBSCRIBE[T]</span>) =&gt;</span> <span class="hljs-keyword">void</span>): <span class="hljs-keyword">void</span>;
+  <span class="hljs-title function_">unsubscribe</span>(<span class="hljs-attr">topic</span>: T, <span class="hljs-attr">cb</span>: <span class="hljs-function">(<span class="hljs-params">data: MESSAGES_SUBSCRIBE[T]</span>) =&gt;</span> <span class="hljs-keyword">void</span>): <span class="hljs-keyword">void</span>;
+};
+
+<span class="hljs-keyword">export</span> type <span class="hljs-title class_">OpenMicrofrontendLifecycleHooks</span> = {
+  <span class="hljs-comment">/**
+   * Lifecycle callbacks.
+   * MAY be provided by the Renderer.
+   * MUST be called by the Host Application when the Microfrontend is going to be removed.
+   */</span>
+  readonly onRemove?: <span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">void</span> | <span class="hljs-title class_">Promise</span>;
+};
+
+<span class="hljs-keyword">export</span> type <span class="hljs-title class_">OpenMicrofrontendsClientContext</span>&lt;
+  <span class="hljs-variable constant_">CONFIG</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Record</span>,
+  <span class="hljs-variable constant_">PERMISSIONS</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Record</span> | <span class="hljs-literal">undefined</span>,
+  <span class="hljs-variable constant_">API_PROXY_PATHS</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Record</span> | <span class="hljs-literal">undefined</span>,
+  <span class="hljs-variable constant_">MESSAGES_PUBLISH</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Record</span> | <span class="hljs-literal">undefined</span>,
+  <span class="hljs-variable constant_">MESSAGES_SUBSCRIBE</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Record</span> | <span class="hljs-literal">undefined</span>
+&gt; = <span class="hljs-title class_">UndefinedToOptional</span>&lt;{
+  <span class="hljs-comment">/**
+   * The unique ID of this Microfrontend instance.
+   * MUST be provided by the Host Application, because it MAY be used to store prefetched state.
+   */</span>
+  readonly <span class="hljs-attr">id</span>: string;
+  <span class="hljs-comment">/**
+   * Two-letter language code.
+   * SHOULD be provided by the Host Application for internationalization.
+   */</span>
+  readonly lang?: string;
+  <span class="hljs-comment">/**
+   * Some basic user information.
+   * SHOULD be provided by the Host Application (if a user is logged in).
+   */</span>
+  readonly user?: {
+    readonly <span class="hljs-attr">username</span>: string;
+    readonly <span class="hljs-attr">displayName</span>: string;
+    readonly [<span class="hljs-attr">otherProp</span>: string]: unknown;
+  };
+  <span class="hljs-comment">/**
+   * Evaluated user permissions.
+   * MUST be provided by the Host Application if *userPermissions* are defined in the Microfrontend Description.
+   */</span>
+  readonly <span class="hljs-attr">permissions</span>: <span class="hljs-variable constant_">PERMISSIONS</span>;
+  <span class="hljs-comment">/**
+   * Evaluated API proxy paths.
+   * MUST be provided by the Host Application if *apiProxies* are defined in the Microfrontend Description.
+   */</span>
+  readonly <span class="hljs-attr">apiProxyPaths</span>: <span class="hljs-variable constant_">API_PROXY_PATHS</span>;
+  <span class="hljs-comment">/**
+   * The Microfrontend config.
+   * MUST be provided by the Host Application. The Host Application MAY use the default config.
+   */</span>
+  readonly <span class="hljs-attr">config</span>: <span class="hljs-variable constant_">CONFIG</span>;
+  <span class="hljs-comment">/**
+   * A message bus for communication between Microfrontends.
+   * MUST be provided by the Host Application if *messages* are defined in the Microfrontend Description.
+   */</span>
+  readonly <span class="hljs-attr">messageBus</span>: <span class="hljs-variable constant_">MESSAGES_PUBLISH</span> <span class="hljs-keyword">extends</span> <span class="hljs-literal">undefined</span>
+    ? <span class="hljs-variable constant_">MESSAGES_SUBSCRIBE</span> <span class="hljs-keyword">extends</span> <span class="hljs-literal">undefined</span>
+      ? <span class="hljs-literal">undefined</span>
+      : <span class="hljs-title class_">MessageBus</span>
+    : <span class="hljs-title class_">MessageBus</span>;
+
+  <span class="hljs-comment">/**
+   * The Microfrontend was rendered server-side, and the host element already contains the initial HTML.
+   * MUST be provided by the Host Application if the Microfrontend was rendered server-side.
+   */</span>
+  readonly serverSideRendered?: boolean;
+  <span class="hljs-comment">/**
+   * Some Host Application context.
+   * MAY be provided by the Host Application.
+   */</span>
+  readonly hostContext?: {
+    readonly <span class="hljs-attr">hostApplicationName</span>: string;
+    readonly [<span class="hljs-attr">propName</span>: string]: any;
+  };
+}&gt;;
+
+<span class="hljs-keyword">export</span> type <span class="hljs-title class_">OpenMicrofrontendsRenderer</span>&lt;
+  <span class="hljs-variable constant_">CONFIG</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Record</span>,
+  <span class="hljs-variable constant_">PERMISSIONS</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Record</span> | <span class="hljs-literal">undefined</span> = <span class="hljs-literal">undefined</span>,
+  <span class="hljs-variable constant_">API_PROXY_PATHS</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Record</span> | <span class="hljs-literal">undefined</span> = <span class="hljs-literal">undefined</span>,
+  <span class="hljs-variable constant_">MESSAGES_PUBLISH</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Record</span> | <span class="hljs-literal">undefined</span> = <span class="hljs-literal">undefined</span>,
+  <span class="hljs-variable constant_">MESSAGES_SUBSCIBE</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Record</span> | <span class="hljs-literal">undefined</span> = <span class="hljs-literal">undefined</span>
+&gt; = <span class="hljs-function">(<span class="hljs-params">
+  hostEl: HTMLElement,
+  context: OpenMicrofrontendsClientContext
+</span>) =&gt;</span> <span class="hljs-title class_">Promise</span>;
+</code></pre>
+
+<p>The generic type-parameters <em>CONFIG</em>, <em>PERMISSIONS</em>, <em>API_PROXY_PATHS</em>, <em>MESSAGES_PUBLISH</em>, and <em>MESSAGES_SUBSCRIBE</em> of the <em>OpenMicrofrontendsRenderer</em> <em class="rfc2119">MUST</em> be derived from their respective definition in the Microfrontend Description.</p>
+</section><section id="openmicrofrontends-server-side-renderer-signature"><div class="header-wrapper"><h3 id="x6-6-openmicrofrontends-server-side-renderer-signature"><bdi class="secno">6.6 </bdi>OpenMicrofrontends Server-Side Renderer Signature</h3><a class="self-link" href="#openmicrofrontends-server-side-renderer-signature" aria-label="Permalink for Section 6.6"></a></div>
+<pre aria-busy="false"><code class="hljs javascript">type <span class="hljs-title class_">UndefinedToOptional</span> = {
+  [K <span class="hljs-keyword">in</span> keyof T <span class="hljs-keyword">as</span> T[K] <span class="hljs-keyword">extends</span> <span class="hljs-literal">undefined</span> ? never : K]: T[K];
+} &amp; <span class="hljs-title class_">Partial</span>;
+
+<span class="hljs-keyword">export</span> type <span class="hljs-title class_">OpenMicrofrontendsSSRResponse</span> = {
+  <span class="hljs-comment">/**
+   * The rendered HTML.
+   * MUST be delivered by the Renderer.
+   */</span>
+  readonly <span class="hljs-attr">html</span>: string;
+  <span class="hljs-comment">/**
+   * JavaScript code to be injected into the  of the Host Application page.
+   * MAY be delivered by the Renderer.
+   */</span>
+  readonly injectHeadScript?: string;
+};
+
+<span class="hljs-keyword">export</span> type <span class="hljs-title class_">OpenMicrofrontendsServerContext</span>&lt;
+  <span class="hljs-variable constant_">CONFIG</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Record</span>,
+  <span class="hljs-variable constant_">PERMISSIONS</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Record</span> | <span class="hljs-literal">undefined</span>
+&gt; = <span class="hljs-title class_">UndefinedToOptional</span>&lt;{
+  <span class="hljs-comment">/**
+   * The unique ID of this Microfrontend instance.
+   * MUST be provided by the Host Application, because it MAY be used to store prefetched state.
+   */</span>
+  readonly <span class="hljs-attr">id</span>: string;
+  <span class="hljs-comment">/**
+   * Two-letter language code.
+   * SHOULD be provided by the Host Application for internationalization.
+   */</span>
+  readonly lang?: string;
+  <span class="hljs-comment">/**
+   * Some basic user information.
+   * SHOULD be provided by the Host Application (if a user is logged in).
+   */</span>
+  readonly user?: {
+    readonly <span class="hljs-attr">username</span>: string;
+    readonly <span class="hljs-attr">displayName</span>: string;
+    readonly [<span class="hljs-attr">otherProp</span>: string]: unknown;
+  };
+  <span class="hljs-comment">/**
+   * Evaluated user permissions.
+   * MUST be provided by the Host Application if *userPermissions* are defined in the Microfrontend Description.
+   */</span>
+  readonly <span class="hljs-attr">permissions</span>: <span class="hljs-variable constant_">PERMISSIONS</span>;
+  <span class="hljs-comment">/**
+   * The Microfrontend config.
+   * MUST be provided by the Host Application. The Host Application MAY use the default config.
+   */</span>
+  readonly <span class="hljs-attr">config</span>: <span class="hljs-variable constant_">CONFIG</span>;
+  <span class="hljs-comment">/**
+   * Some Host Application context.
+   * MAY be provided by the Host Application.
+   */</span>
+  readonly hostContext?: {
+    readonly <span class="hljs-attr">hostApplicationName</span>: string;
+    readonly [<span class="hljs-attr">propName</span>: string]: any;
+  };
+}&gt;;
+
+<span class="hljs-keyword">export</span> type <span class="hljs-title class_">OpenMicrofrontendsServerSideRenderer</span>&lt;
+  <span class="hljs-variable constant_">CONFIG</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Record</span>,
+  <span class="hljs-variable constant_">PERMISSIONS</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Record</span> | <span class="hljs-literal">undefined</span> = <span class="hljs-literal">undefined</span>
+&gt; = <span class="hljs-function">(<span class="hljs-params">requestBody: OpenMicrofrontendsServerContext</span>) =&gt;</span> <span class="hljs-title class_">Promise</span>;
+</code></pre>
+
+<p>The generic type-parameters <em>CONFIG</em>, and <em>PERMISSIONS</em>, of the <em>OpenMicrofrontendsServerRenderer</em> <em class="rfc2119">MUST</em> be derived from their respective definition in the Microfrontend Description.</p>
+<p>The request and response structure of the JSON payload to an SSR endpoint <em class="rfc2119">MUST</em> follow the argument- and return-type of the <em>OpenMicrofrontendsServerSiderRendererFunction</em> type.</p>
+</section></section><section id="implementation-hints"><div class="header-wrapper"><h2 id="x7-implementation-hints"><bdi class="secno">7. </bdi>Implementation Hints</h2><a class="self-link" href="#implementation-hints" aria-label="Permalink for Section 7."></a></div>
+<p>You can find some useful hints about some specific aspects in the Microfrontend development and what to consider for Host Applications here: <a href="https://www.open-microfrontends.org/implementation-hints">https://www.open-microfrontends.org/implementation-hints</a>.</p>
+</section><section id="full-example"><div class="header-wrapper"><h2 id="x8-full-example"><bdi class="secno">8. </bdi>Full Example</h2><a class="self-link" href="#full-example" aria-label="Permalink for Section 8."></a></div>
+<pre><code class="yaml hljs" aria-busy="false"><span class="hljs-attr">openMicrofrontends:</span> <span class="hljs-number">1.0</span><span class="hljs-number">.0</span>
+<span class="hljs-attr">info:</span>
+  <span class="hljs-attr">title:</span> <span class="hljs-string">OpenMicrofrontends</span> <span class="hljs-string">Example</span>
+  <span class="hljs-attr">description:</span> <span class="hljs-string">Example</span> <span class="hljs-string">Microfrontends</span>
+  <span class="hljs-attr">version:</span> <span class="hljs-number">1.0</span><span class="hljs-number">.0</span>
+  <span class="hljs-attr">contact:</span>
+    <span class="hljs-attr">author:</span> <span class="hljs-string">OpenMicrofrontends</span>
+    <span class="hljs-attr">email:</span> <span class="hljs-string">test@test.com</span>
+    <span class="hljs-attr">organization:</span> <span class="hljs-string">OpenMicrofrontends</span>
+<span class="hljs-attr">servers:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">url:</span> <span class="hljs-string">http://my-test-server.com</span>
+    <span class="hljs-attr">description:</span> <span class="hljs-string">Test</span> <span class="hljs-string">Server</span>
+<span class="hljs-attr">securitySchemes:</span>
+  <span class="hljs-attr">ApiKeyAuth:</span>
+    <span class="hljs-attr">type:</span> <span class="hljs-string">apiKey</span>
+    <span class="hljs-attr">in:</span> <span class="hljs-string">header</span>
+    <span class="hljs-attr">name:</span> <span class="hljs-string">X-API-Key</span>
+<span class="hljs-attr">microfrontends:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">My</span> <span class="hljs-string">First</span> <span class="hljs-string">Microfrontend</span>
+    <span class="hljs-attr">title:</span>
+      <span class="hljs-attr">en:</span> <span class="hljs-string">My</span> <span class="hljs-string">First</span> <span class="hljs-string">Microfrontend</span>
+      <span class="hljs-attr">de:</span> <span class="hljs-string">Mein</span> <span class="hljs-string">erstes</span> <span class="hljs-string">Microfrontend</span>
+    <span class="hljs-attr">description:</span> <span class="hljs-string">An</span> <span class="hljs-string">example</span> <span class="hljs-string">microfrontend</span> <span class="hljs-string">that</span> <span class="hljs-string">shows</span> <span class="hljs-string">all</span> <span class="hljs-string">the</span> <span class="hljs-string">features</span> <span class="hljs-string">of</span> <span class="hljs-string">the</span> <span class="hljs-string">OpenMicrofrontends</span> <span class="hljs-string">schema</span>
+    <span class="hljs-attr">assets:</span>
+      <span class="hljs-attr">basePath:</span> <span class="hljs-string">/</span>
+      <span class="hljs-attr">buildManifestPath:</span> <span class="hljs-string">/build.yaml</span>
+      <span class="hljs-attr">js:</span>
+        <span class="hljs-attr">moduleSystem:</span> <span class="hljs-string">ESM</span>
+        <span class="hljs-attr">initial:</span>
+          <span class="hljs-bullet">-</span> <span class="hljs-string">Microfrontend.js</span>
+        <span class="hljs-attr">importMap:</span>
+          <span class="hljs-attr">imports:</span>
+            <span class="hljs-attr">externalModule1:</span> <span class="hljs-string">https://ga.jspm.io/npm:externalModule1@1.2.2/index.js</span>
+            <span class="hljs-attr">externalModule2:</span> <span class="hljs-string">https://ga.jspm.io/npm:externalModule2@5.1.8/index.js</span>
+      <span class="hljs-attr">css:</span>
+        <span class="hljs-bullet">-</span> <span class="hljs-string">styles.css</span>
+    <span class="hljs-attr">rendererFunctionName:</span> <span class="hljs-string">startMyFirstMicrofrontend</span>
+    <span class="hljs-attr">ssr:</span>
+      <span class="hljs-attr">path:</span> <span class="hljs-string">/ssr</span>
+      <span class="hljs-attr">security:</span>
+        <span class="hljs-bullet">-</span> <span class="hljs-attr">ApiKeyAuth:</span> []
+    <span class="hljs-attr">userPermissions:</span>
+      <span class="hljs-attr">permissions:</span>
+        <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">showDetails</span>
+          <span class="hljs-attr">description:</span> <span class="hljs-string">The</span> <span class="hljs-string">authenticated</span> <span class="hljs-string">user</span> <span class="hljs-string">is</span> <span class="hljs-string">permitted</span> <span class="hljs-string">to</span> <span class="hljs-string">see</span> <span class="hljs-string">details</span>
+        <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">deletePermitted</span>
+          <span class="hljs-attr">description:</span> <span class="hljs-string">The</span> <span class="hljs-string">authenticated</span> <span class="hljs-string">user</span> <span class="hljs-string">is</span> <span class="hljs-string">permitted</span> <span class="hljs-string">to</span> <span class="hljs-string">delete</span> <span class="hljs-string">items</span>
+      <span class="hljs-attr">provided:</span>
+        <span class="hljs-attr">path:</span> <span class="hljs-string">/permissions</span>
+        <span class="hljs-attr">security:</span>
+          <span class="hljs-bullet">-</span> <span class="hljs-attr">ApiKeyAuth:</span> []
+    <span class="hljs-attr">apiProxies:</span>
+      <span class="hljs-attr">proxy1:</span>
+        <span class="hljs-attr">description:</span> <span class="hljs-string">Proxy</span> <span class="hljs-string">for</span> <span class="hljs-string">the</span> <span class="hljs-string">internal</span> <span class="hljs-string">BFF</span> <span class="hljs-string">API</span>
+        <span class="hljs-attr">path:</span> <span class="hljs-string">/api</span>
+        <span class="hljs-attr">security:</span>
+          <span class="hljs-bullet">-</span> <span class="hljs-attr">ApiKeyAuth:</span> []
+      <span class="hljs-attr">proxy2:</span>
+        <span class="hljs-attr">description:</span> <span class="hljs-string">A</span> <span class="hljs-string">proxy</span> <span class="hljs-string">for</span> <span class="hljs-string">an</span> <span class="hljs-string">external</span> <span class="hljs-string">API</span>
+        <span class="hljs-attr">targets:</span>
+          <span class="hljs-bullet">-</span> <span class="hljs-attr">url:</span> <span class="hljs-string">https://localhost:1234/api</span>
+            <span class="hljs-attr">description:</span> <span class="hljs-string">Local</span>
+          <span class="hljs-bullet">-</span> <span class="hljs-attr">url:</span> <span class="hljs-string">http://my-api.my-namespace:1234/api</span>
+            <span class="hljs-attr">description:</span> <span class="hljs-string">Test</span> <span class="hljs-string">environment</span>
+    <span class="hljs-attr">config:</span>
+      <span class="hljs-attr">schema:</span>
+        <span class="hljs-attr">type:</span> <span class="hljs-string">object</span>
+        <span class="hljs-attr">properties:</span>
+          <span class="hljs-attr">customerId:</span>
+            <span class="hljs-attr">type:</span> <span class="hljs-string">string</span>
+        <span class="hljs-attr">required:</span>
+          <span class="hljs-bullet">-</span> <span class="hljs-string">customerId</span>
+        <span class="hljs-attr">additionalProperties:</span> <span class="hljs-literal">false</span>
+      <span class="hljs-attr">default:</span>
+        <span class="hljs-attr">customerId:</span> <span class="hljs-string">'1000'</span>
+    <span class="hljs-attr">messages:</span>
+      <span class="hljs-attr">ping:</span>
+        <span class="hljs-attr">publish:</span> <span class="hljs-literal">true</span>
+        <span class="hljs-attr">subscribe:</span> <span class="hljs-literal">true</span>
+        <span class="hljs-attr">schema:</span>
+          <span class="hljs-attr">type:</span> <span class="hljs-string">object</span>
+          <span class="hljs-attr">properties:</span>
+            <span class="hljs-attr">ping:</span>
+              <span class="hljs-attr">const:</span> <span class="hljs-literal">true</span>
+          <span class="hljs-attr">required:</span>
+            <span class="hljs-bullet">-</span> <span class="hljs-string">ping</span>
+    <span class="hljs-attr">annotations:</span>
+      <span class="hljs-attr">MY_COCKPIT_CAPABILITIES:</span>
+        <span class="hljs-attr">businessEntity:</span> <span class="hljs-string">Customer</span>
+        <span class="hljs-attr">contentType:</span> <span class="hljs-string">overview</span>
+</code></pre>
+</section><section id="json-schema"><div class="header-wrapper"><h2 id="x9-json-schema"><bdi class="secno">9. </bdi>JSON Schema</h2><a class="self-link" href="#json-schema" aria-label="Permalink for Section 9."></a></div>
+<p>The corresponding JSON Schema is available here: <a href="https://open-microfrontends.org/schemas/1-0-0">https://open-microfrontends.org/schemas/1-0-0</a></p>
+</section><section id="references" class="appendix"><div class="header-wrapper"><h2 id="a-references"><bdi class="secno">A. </bdi>References</h2><a class="self-link" href="#references" aria-label="Permalink for Appendix A."></a></div><section id="normative-references"><div class="header-wrapper"><h3 id="a-1-normative-references"><bdi class="secno">A.1 </bdi>Normative references</h3><a class="self-link" href="#normative-references" aria-label="Permalink for Appendix A.1"></a></div>
+    
+    <dl class="bibliography"><dt id="bib-rfc2119">[RFC2119]</dt><dd>
+      <a href="https://www.rfc-editor.org/rfc/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. S. Bradner.  IETF. March 1997. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>
+    </dd><dt id="bib-rfc8174">[RFC8174]</dt><dd>
+      <a href="https://www.rfc-editor.org/rfc/rfc8174"><cite>Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</cite></a>. B. Leiba.  IETF. May 2017. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>
+    </dd></dl>
+  </section></section><p role="navigation" id="back-to-top">
+    <a href="#title"><abbr title="Back to Top">↑</abbr></a>
+  </p><script id="respec-highlight-vars">(() => {
+// @ts-check
+
+if (document.respec) {
+  document.respec.ready.then(setupVarHighlighter);
+} else {
+  setupVarHighlighter();
+}
+
+function setupVarHighlighter() {
+  document
+    .querySelectorAll("var")
+    .forEach(varElem => varElem.addEventListener("click", highlightListener));
+}
+
+function highlightListener(ev) {
+  ev.stopPropagation();
+  const { target: varElem } = ev;
+  const hightligtedElems = highlightVars(varElem);
+  const resetListener = () => {
+    const hlColor = getHighlightColor(varElem);
+    hightligtedElems.forEach(el => removeHighlight(el, hlColor));
+    [...HL_COLORS.keys()].forEach(key => HL_COLORS.set(key, true));
+  };
+  if (hightligtedElems.length) {
+    document.body.addEventListener("click", resetListener, { once: true });
+  }
+}
+
+// availability of highlight colors. colors from var.css
+const HL_COLORS = new Map([
+  ["respec-hl-c1", true],
+  ["respec-hl-c2", true],
+  ["respec-hl-c3", true],
+  ["respec-hl-c4", true],
+  ["respec-hl-c5", true],
+  ["respec-hl-c6", true],
+  ["respec-hl-c7", true],
+]);
+
+function getHighlightColor(target) {
+  // return current colors if applicable
+  const { value } = target.classList;
+  const re = /respec-hl-\w+/;
+  const activeClass = re.test(value) && value.match(re);
+  if (activeClass) return activeClass[0];
+
+  // first color preference
+  if (HL_COLORS.get("respec-hl-c1") === true) return "respec-hl-c1";
+
+  // otherwise get some other available color
+  return [...HL_COLORS.keys()].find(c => HL_COLORS.get(c)) || "respec-hl-c1";
+}
+
+function highlightVars(varElem) {
+  const textContent = norm(varElem.textContent);
+  const parent = varElem.closest(".algorithm, section");
+  const highlightColor = getHighlightColor(varElem);
+
+  const varsToHighlight = [...parent.querySelectorAll("var")].filter(
+    el =>
+      norm(el.textContent) === textContent &&
+      el.closest(".algorithm, section") === parent
+  );
+
+  // update availability of highlight color
+  const colorStatus = varsToHighlight[0].classList.contains("respec-hl");
+  HL_COLORS.set(highlightColor, colorStatus);
+
+  // highlight vars
+  if (colorStatus) {
+    varsToHighlight.forEach(el => removeHighlight(el, highlightColor));
+    return [];
+  } else {
+    varsToHighlight.forEach(el => addHighlight(el, highlightColor));
+  }
+  return varsToHighlight;
+}
+
+function removeHighlight(el, highlightColor) {
+  el.classList.remove("respec-hl", highlightColor);
+  // clean up empty class attributes so they don't come in export
+  if (!el.classList.length) el.removeAttribute("class");
+}
+
+function addHighlight(elem, highlightColor) {
+  elem.classList.add("respec-hl", highlightColor);
+}
+
+/**
+ * Same as `norm` from src/core/utils, but our build process doesn't allow
+ * imports in runtime scripts, so duplicated here.
+ * @param {string} str
+ */
+function norm(str) {
+  return str.trim().replace(/\s+/g, " ");
+}
+})()</script><script id="respec-dfn-panel">(() => {
+// @ts-check
+if (document.respec) {
+  document.respec.ready.then(setupPanel);
+} else {
+  setupPanel();
+}
+
+function setupPanel() {
+  const listener = panelListener();
+  document.body.addEventListener("keydown", listener);
+  document.body.addEventListener("click", listener);
+}
+
+function panelListener() {
+  /** @type {HTMLElement} */
+  let panel = null;
+  return event => {
+    const { target, type } = event;
+
+    if (!(target instanceof HTMLElement)) return;
+
+    // For keys, we only care about Enter key to activate the panel
+    // otherwise it's activated via a click.
+    if (type === "keydown" && event.key !== "Enter") return;
+
+    const action = deriveAction(event);
+
+    switch (action) {
+      case "show": {
+        hidePanel(panel);
+        /** @type {HTMLElement} */
+        const dfn = target.closest("dfn, .index-term");
+        panel = document.getElementById(`dfn-panel-for-${dfn.id}`);
+        const coords = deriveCoordinates(event);
+        displayPanel(dfn, panel, coords);
+        break;
+      }
+      case "dock": {
+        panel.style.left = null;
+        panel.style.top = null;
+        panel.classList.add("docked");
+        break;
+      }
+      case "hide": {
+        hidePanel(panel);
+        panel = null;
+        break;
+      }
+    }
+  };
+}
+
+/**
+ * @param {MouseEvent|KeyboardEvent} event
+ */
+function deriveCoordinates(event) {
+  const target = /** @type HTMLElement */ (event.target);
+
+  // We prevent synthetic AT clicks from putting
+  // the dialog in a weird place. The AT events sometimes
+  // lack coordinates, so they have clientX/Y = 0
+  const rect = target.getBoundingClientRect();
+  if (
+    event instanceof MouseEvent &&
+    event.clientX >= rect.left &&
+    event.clientY >= rect.top
+  ) {
+    // The event probably happened inside the bounding rect...
+    return { x: event.clientX, y: event.clientY };
+  }
+
+  // Offset to the middle of the element
+  const x = rect.x + rect.width / 2;
+  // Placed at the bottom of the element
+  const y = rect.y + rect.height;
+  return { x, y };
+}
+
+/**
+ * @param {Event} event
+ */
+function deriveAction(event) {
+  const target = /** @type {HTMLElement} */ (event.target);
+  const hitALink = !!target.closest("a");
+  if (target.closest("dfn:not([data-cite]), .index-term")) {
+    return hitALink ? "none" : "show";
+  }
+  if (target.closest(".dfn-panel")) {
+    if (hitALink) {
+      return target.classList.contains("self-link") ? "hide" : "dock";
+    }
+    const panel = target.closest(".dfn-panel");
+    return panel.classList.contains("docked") ? "hide" : "none";
+  }
+  if (document.querySelector(".dfn-panel:not([hidden])")) {
+    return "hide";
+  }
+  return "none";
+}
+
+/**
+ * @param {HTMLElement} dfn
+ * @param {HTMLElement} panel
+ * @param {{ x: number, y: number }} clickPosition
+ */
+function displayPanel(dfn, panel, { x, y }) {
+  panel.hidden = false;
+  // distance (px) between edge of panel and the pointing triangle (caret)
+  const MARGIN = 20;
+
+  const dfnRects = dfn.getClientRects();
+  // Find the `top` offset when the `dfn` can be spread across multiple lines
+  let closestTop = 0;
+  let minDiff = Infinity;
+  for (const rect of dfnRects) {
+    const { top, bottom } = rect;
+    const diffFromClickY = Math.abs((top + bottom) / 2 - y);
+    if (diffFromClickY < minDiff) {
+      minDiff = diffFromClickY;
+      closestTop = top;
+    }
+  }
+
+  const top = window.scrollY + closestTop + dfnRects[0].height;
+  const left = x - MARGIN;
+  panel.style.left = `${left}px`;
+  panel.style.top = `${top}px`;
+
+  // Find if the panel is flowing out of the window
+  const panelRect = panel.getBoundingClientRect();
+  const SCREEN_WIDTH = Math.min(window.innerWidth, window.screen.width);
+  if (panelRect.right > SCREEN_WIDTH) {
+    const newLeft = Math.max(MARGIN, x + MARGIN - panelRect.width);
+    const newCaretOffset = left - newLeft;
+    panel.style.left = `${newLeft}px`;
+    /** @type {HTMLElement} */
+    const caret = panel.querySelector(".caret");
+    caret.style.left = `${newCaretOffset}px`;
+  }
+
+  // As it's a dialog, we trap focus.
+  // TODO: when <dialog> becomes a implemented, we should really
+  // use that.
+  trapFocus(panel, dfn);
+}
+
+/**
+ * @param {HTMLElement} panel
+ * @param {HTMLElement} dfn
+ * @returns
+ */
+function trapFocus(panel, dfn) {
+  /** @type NodeListOf<HTMLAnchorElement> elements */
+  const anchors = panel.querySelectorAll("a[href]");
+  // No need to trap focus
+  if (!anchors.length) return;
+
+  // Move focus to first anchor element
+  const first = anchors.item(0);
+  first.focus();
+
+  const trapListener = createTrapListener(anchors, panel, dfn);
+  panel.addEventListener("keydown", trapListener);
+
+  // Hiding the panel releases the trap
+  const mo = new MutationObserver(records => {
+    const [record] = records;
+    const target = /** @type HTMLElement */ (record.target);
+    if (target.hidden) {
+      panel.removeEventListener("keydown", trapListener);
+      mo.disconnect();
+    }
+  });
+  mo.observe(panel, { attributes: true, attributeFilter: ["hidden"] });
+}
+
+/**
+ *
+ * @param {NodeListOf<HTMLAnchorElement>} anchors
+ * @param {HTMLElement} panel
+ * @param {HTMLElement} dfn
+ * @returns
+ */
+function createTrapListener(anchors, panel, dfn) {
+  const lastIndex = anchors.length - 1;
+  let currentIndex = 0;
+  return event => {
+    switch (event.key) {
+      // Hitting "Tab" traps us in a nice loop around elements.
+      case "Tab": {
+        event.preventDefault();
+        currentIndex += event.shiftKey ? -1 : +1;
+        if (currentIndex < 0) {
+          currentIndex = lastIndex;
+        } else if (currentIndex > lastIndex) {
+          currentIndex = 0;
+        }
+        anchors.item(currentIndex).focus();
+        break;
+      }
+
+      // Hitting "Enter" on an anchor releases the trap.
+      case "Enter":
+        hidePanel(panel);
+        break;
+
+      // Hitting "Escape" returns focus to dfn.
+      case "Escape":
+        hidePanel(panel);
+        dfn.focus();
+        return;
+    }
+  };
+}
+
+/** @param {HTMLElement} panel */
+function hidePanel(panel) {
+  if (!panel) return;
+  panel.hidden = true;
+  panel.classList.remove("docked");
+}
+})()</script><script src="https://www.w3.org/scripts/TR/2021/fixup.js"></script></body></html>

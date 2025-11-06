@@ -21,7 +21,7 @@ The specification includes:
 
 * Basic metadata like name, title, description
 * The assets (js, css) and how to load them
-* The schema of the *config* that can be provided when started
+* The schema of the *config* object that can be provided when starting the Microfrontend
 * The schema of messages the *Microfrontend* sends and receives (pub/sub)
 * API proxies that are required to access (protected) backends
 * Security hints
@@ -30,11 +30,11 @@ The specification includes:
 It is a community effort to provide a way to describe *Microfrontends* and how to integrate them in a standardized way.
 All code we provide is free and open source, and will be forever.
 
-This specification makes it possible to decouple *Microfrontend* development from their integration and to treat *Microfrontends* exactly like *Microservices*
+The specification makes it possible to decouple *Microfrontend* development from their integration into applications, and to treat *Microfrontends* exactly like *Microservices*
 with only a different formal description.
 
 <br/>
 
-[Getting Started](/getting-started){ .md-button }
+[Getting Started](getting-started.md){ .md-button }
 
 <br/>

@@ -17,17 +17,35 @@ Add to your *package.json*:
 }
 ```
 
-Then run the generator like this:
+To generate code run:
 
-    omg microfrontends.yaml src/_generated -t <template1>,<template2>
+    omg <descriptionFile> <outFolder> -t <template1>,<template2>
+
+Arguments:
+
+* *descriptionFile*: The OpenMicrofrontends description (yaml/json)
+* *outFolder*: The target folder for generated code (not required for --validationOnly)
+
+Options:
+
+| Option                     | Description                                                         |
+|----------------------------|---------------------------------------------------------------------|
+| -t, --templates            | A comma separated list of templates to use                          |
+| -a, --additionalProperties | A comma separated list of extra properties to pass to the templates |
+| -v, --validationOnly       | Only validate given spec file and exit                              |
+| --help                     | Usage info                                                          |
 
 ## Examples
 
-Generate *Renderer Function* interfaces:
+Validate your *Description*:
+
+    omg microfrontends.yaml --validationOnly 
+
+Generate *Renderers*:
 
     omg microfrontends.yaml src/_generated -t renderers
 
-Generate *Starter Functions*:
+Generate *Starters*:
 
     omg microfrontends.yaml src/_generated -t starters
 

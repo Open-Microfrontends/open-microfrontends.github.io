@@ -10,7 +10,7 @@ nav:
 - Implementation Hints:
   - Implementation Hints: implementation-hints/index.md
   - Microfrontends: implementation-hints/microfrontends.md
-  - Application Hosts: implementation-hints/application-hosts.md
+  - Host Applications: implementation-hints/host-applications.md
 theme:
   name: material
   logo: assets/logo.svg

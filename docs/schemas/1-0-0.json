@@ -107,7 +107,7 @@
         },
         "buildManifestPath": {
           "$ref": "#/$defs/AbsoluteJsonOrYamlPath",
-          "description": "Path to a build manifest containing a 'version' or 'timestamp' property that can be used by the Application Host for cache busting"
+          "description": "Path to a build manifest containing a 'version' or 'timestamp' property that can be used by the Host Application for cache busting"
         }
       },
       "required": ["js"],
