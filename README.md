@@ -1,10 +1,10 @@
-# Open Microfrontends Homepage
+# OpenMicrofrontends Homepage
 
 Based on [Material for MkDocs](https://squidfunk.github.io/mkdocs-material)
 
 ## Preview
 
-### Install Material for MkDocs 
+### Install Material for MkDocs [host-applications.md](docs/implementation-hints/host-applications.md)
 
     pip install mkdocs-material
 

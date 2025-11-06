@@ -36,7 +36,7 @@ The asset names in the *Description* **must** remain stable between two deployme
 
 The reason is that in an environment with rolling updates (like *Kubernetes*), there can be multiple release versions running at the same time.
 
-You should consider to expose a [Build Manifest](#build-manifest-browser-caching) to give the *Host Application* means for cache busting. 
+You should consider exposing a [Build Manifest](#build-manifest-browser-caching) to give the *Host Application* means for cache busting. 
 
 ### Asset Paths
 
