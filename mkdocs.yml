@@ -54,4 +54,7 @@ extra:
   social:
   - icon: fontawesome/brands/github
     link: https://github.com/Open-Microfrontends/open-microfrontends
+  analytics:
+    provider: google
+    property: G-HH7Z6GEMVC
 copyright: Copyright &copy; OpenMicrofrontends Contributers
