@@ -1,0 +1,700 @@
+{
+  "$id": "https://open-microfrontends.org/schemas/1-0-0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "I18NString": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "patternProperties": {
+            "^[a-z]{2}$": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "HttpUrl": {
+      "type": "string",
+      "pattern": "^(\\$|http://|https://).*$"
+    },
+    "RelativeJsPath": {
+      "type": "string",
+      "pattern": "^[a-zA-Z].*\\.(mjs|js)$"
+    },
+    "RelativeCssPath": {
+      "type": "string",
+      "pattern": "^[a-zA-Z].*\\.css$"
+    },
+    "AbsoluteJsonOrYamlPath": {
+      "type": "string",
+      "pattern": "^/[a-zA-Z0-9-_/]*\\.(json|yaml)$"
+    },
+    "AbsolutePath": {
+      "type": "string",
+      "pattern": "^/[a-zA-Z0-9-_/]*$"
+    },
+    "Server": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "$ref": "#/$defs/HttpUrl"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": ["url"],
+      "additionalProperties": false
+    },
+    "ContactInfo": {
+      "type": "object",
+      "properties": {
+        "author": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "organization": {
+          "type": "string"
+        }
+      },
+      "required": ["author", "organization"],
+      "additionalProperties": false
+    },
+    "Info": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "contact": {
+          "$ref": "#/$defs/ContactInfo"
+        }
+      },
+      "required": ["title", "version"],
+      "additionalProperties": false
+    },
+    "Assets": {
+      "type": "object",
+      "properties": {
+        "basePath": {
+          "$ref": "#/$defs/AbsolutePath",
+          "description": "The base path for assets (Default: /)"
+        },
+        "js": {
+          "$ref": "#/$defs/JavaScriptAssets",
+          "description": "The initial Microfrontend assets"
+        },
+        "css": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RelativeCssPath"
+          },
+          "description": "A list of CSS assets"
+        },
+        "buildManifestPath": {
+          "$ref": "#/$defs/AbsoluteJsonOrYamlPath",
+          "description": "Path to a build manifest containing a 'version' or 'timestamp' property that can be used by the Host Application for cache busting"
+        }
+      },
+      "required": ["js"],
+      "additionalProperties": false
+    },
+    "JavaScriptAssets": {
+      "type": "object",
+      "properties": {
+        "initial": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RelativeJsPath"
+          },
+          "description": "A list of JS files"
+        },
+        "moduleSystem": {
+          "type": "string",
+          "enum": ["ESM", "SystemJS", "none"]
+        },
+        "importMap": {
+          "$ref": "#/$defs/ImportMap"
+        }
+      },
+      "required": ["initial"],
+      "additionalProperties": false
+    },
+    "ImportMap": {
+      "type": "object",
+      "properties": {
+        "imports": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/HttpUrl"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": ["imports"]
+    },
+    "SSR": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/AbsolutePath",
+          "description": "The path of the route to generate the initial HTML for Hybrid Rendering"
+        },
+        "security": {
+          "$ref": "#/$defs/Security"
+        }
+      },
+      "required": ["path"],
+      "additionalProperties": false
+    },
+    "Permission": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the permission"
+        },
+        "description": {
+          "type": "string",
+          "description": "The description what exactly the permission controls"
+        }
+      },
+      "required": ["name"],
+      "additionalProperties": false
+    },
+    "UserPermissionProvider": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/AbsolutePath",
+          "description": "The path of the route to get the calculated user permissions"
+        },
+        "security": {
+          "$ref": "#/$defs/Security"
+        }
+      },
+      "required": ["path"],
+      "additionalProperties": false
+    },
+    "UserPermissions": {
+      "type": "object",
+      "description": "User permissions used in this Microfrontend for fine grained security",
+      "properties": {
+        "permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Permission"
+          }
+        },
+        "provided": {
+          "$ref": "#/$defs/UserPermissionProvider"
+        }
+      },
+      "required": ["permissions"],
+      "additionalProperties": false
+    },
+    "Security": {
+      "$comment": "This schema has been copied over from the OpenAPI schema https://spec.openapis.org/oas/3.1/schema/2025-03-19 and has been modified for our schema",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/_EXTERNAL/_OPEN_API/security-requirement"
+      }
+    },
+    "APIProxyConfigBFF": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "path": {
+          "$ref": "#/$defs/AbsolutePath"
+        },
+        "security": {
+          "$ref": "#/$defs/Security"
+        }
+      },
+      "required": ["path"],
+      "additionalProperties": false
+    },
+    "APIProxyConfigExternalTarget": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "url": {
+          "$ref": "#/$defs/HttpUrl"
+        },
+        "security": {
+          "$ref": "#/$defs/Security"
+        }
+      },
+      "required": ["url"],
+      "additionalProperties": false
+    },
+    "APIProxyConfigExternal": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/APIProxyConfigExternalTarget"
+          }
+        },
+        "security": {
+          "$ref": "#/$defs/Security"
+        }
+      },
+      "additionalProperties": false
+    },
+    "APIProxyConfig": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/APIProxyConfigBFF"
+        },
+        {
+          "$ref": "#/$defs/APIProxyConfigExternal"
+        }
+      ]
+    },
+    "APIProxy": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-zA-Z_][a-zA-Z0-9_]+$": {
+          "$ref": "#/$defs/APIProxyConfig"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Defines private API endpoints the Host Application needs to provide paths for"
+    },
+    "Config": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "$ref": "https://json-schema.org/draft/2020-12/schema"
+        },
+        "default": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "required": ["schema", "default"],
+      "additionalProperties": false
+    },
+    "Message": {
+      "type": "object",
+      "properties": {
+        "publish": {
+          "type": "boolean",
+          "description": "The Microfrontend publish this message type"
+        },
+        "subscribe": {
+          "type": "boolean",
+          "description": "The Microfrontend subscribes this message type"
+        },
+        "schema": {
+          "$ref": "https://json-schema.org/draft/2020-12/schema"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Messages": {
+      "type": "object",
+      "patternProperties": {
+        "^.+$": {
+          "$ref": "#/$defs/Message"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Annotations": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Some annotations for Host Applications"
+    },
+    "Microfrontend": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9- ]+$"
+        },
+        "title": {
+          "$ref": "#/$defs/I18NString"
+        },
+        "description": {
+          "type": "string"
+        },
+        "assets": {
+          "$ref": "#/$defs/Assets"
+        },
+        "ssr": {
+          "$ref": "#/$defs/SSR"
+        },
+        "userPermissions": {
+          "$ref": "#/$defs/UserPermissions"
+        },
+        "rendererFunctionName": {
+          "type": "string",
+          "description": "The name of the function that can be used in the browser to start this Microfrontend"
+        },
+        "apiProxies": {
+          "$ref": "#/$defs/APIProxy"
+        },
+        "config": {
+          "$ref": "#/$defs/Config"
+        },
+        "messages": {
+          "$ref": "#/$defs/Messages"
+        },
+        "annotations": {
+          "$ref": "#/$defs/Annotations"
+        }
+      },
+      "required": ["name", "assets", "rendererFunctionName"],
+      "additionalProperties": false
+    },
+    "_EXTERNAL": {
+      "$comment": "This section contains all third-party schemas",
+      "_OPEN_API": {
+        "$comment": "All schemas in this section have been copied over from the OpenAPI schema https://spec.openapis.org/oas/3.1/schema/2025-03-19 and have their $ref adjusted for our schema",
+        "reference": {
+          "$comment": "https://spec.openapis.org/oas/v3.1#reference-object",
+          "type": "object",
+          "properties": {
+            "$ref": {
+              "type": "string",
+              "format": "uri-reference"
+            },
+            "summary": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            }
+          }
+        },
+        "security-scheme": {
+          "$comment": "https://spec.openapis.org/oas/v3.1#security-scheme-object",
+          "type": "object",
+          "properties": {
+            "type": {
+              "enum": ["apiKey", "http", "mutualTLS", "oauth2", "openIdConnect"]
+            },
+            "description": {
+              "type": "string"
+            }
+          },
+          "required": ["type"],
+          "allOf": [
+            {
+              "$ref": "#/$defs/_EXTERNAL/_OPEN_API/specification-extensions"
+            },
+            {
+              "$ref": "#/$defs/_EXTERNAL/_OPEN_API/security-scheme/$defs/type-apikey"
+            },
+            {
+              "$ref": "#/$defs/_EXTERNAL/_OPEN_API/security-scheme/$defs/type-http"
+            },
+            {
+              "$ref": "#/$defs/_EXTERNAL/_OPEN_API/security-scheme/$defs/type-http-bearer"
+            },
+            {
+              "$ref": "#/$defs/_EXTERNAL/_OPEN_API/security-scheme/$defs/type-oauth2"
+            },
+            {
+              "$ref": "#/$defs/_EXTERNAL/_OPEN_API/security-scheme/$defs/type-oidc"
+            }
+          ],
+          "unevaluatedProperties": false,
+          "$defs": {
+            "type-apikey": {
+              "if": {
+                "properties": {
+                  "type": {
+                    "const": "apiKey"
+                  }
+                },
+                "required": ["type"]
+              },
+              "then": {
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "in": {
+                    "enum": ["query", "header", "cookie"]
+                  }
+                },
+                "required": ["name", "in"]
+              }
+            },
+            "type-http": {
+              "if": {
+                "properties": {
+                  "type": {
+                    "const": "http"
+                  }
+                },
+                "required": ["type"]
+              },
+              "then": {
+                "properties": {
+                  "scheme": {
+                    "type": "string"
+                  }
+                },
+                "required": ["scheme"]
+              }
+            },
+            "type-http-bearer": {
+              "if": {
+                "properties": {
+                  "type": {
+                    "const": "http"
+                  },
+                  "scheme": {
+                    "type": "string",
+                    "pattern": "^[Bb][Ee][Aa][Rr][Ee][Rr]$"
+                  }
+                },
+                "required": ["type", "scheme"]
+              },
+              "then": {
+                "properties": {
+                  "bearerFormat": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "type-oauth2": {
+              "if": {
+                "properties": {
+                  "type": {
+                    "const": "oauth2"
+                  }
+                },
+                "required": ["type"]
+              },
+              "then": {
+                "properties": {
+                  "flows": {
+                    "$ref": "#/$defs/_EXTERNAL/_OPEN_API/oauth-flows"
+                  }
+                },
+                "required": ["flows"]
+              }
+            },
+            "type-oidc": {
+              "if": {
+                "properties": {
+                  "type": {
+                    "const": "openIdConnect"
+                  }
+                },
+                "required": ["type"]
+              },
+              "then": {
+                "properties": {
+                  "openIdConnectUrl": {
+                    "type": "string",
+                    "format": "uri-reference"
+                  }
+                },
+                "required": ["openIdConnectUrl"]
+              }
+            }
+          }
+        },
+        "security-scheme-or-reference": {
+          "if": {
+            "type": "object",
+            "required": ["$ref"]
+          },
+          "then": {
+            "$ref": "#/$defs/_EXTERNAL/_OPEN_API/reference"
+          },
+          "else": {
+            "$ref": "#/$defs/_EXTERNAL/_OPEN_API/security-scheme"
+          }
+        },
+        "security-requirement": {
+          "$comment": "https://spec.openapis.org/oas/v3.1#security-requirement-object",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "oauth-flows": {
+          "type": "object",
+          "properties": {
+            "implicit": {
+              "$ref": "#/$defs/_EXTERNAL/_OPEN_API/oauth-flows/$defs/implicit"
+            },
+            "password": {
+              "$ref": "#/$defs/_EXTERNAL/_OPEN_API/oauth-flows/$defs/password"
+            },
+            "clientCredentials": {
+              "$ref": "#/$defs/_EXTERNAL/_OPEN_API/oauth-flows/$defs/client-credentials"
+            },
+            "authorizationCode": {
+              "$ref": "#/$defs/_EXTERNAL/_OPEN_API/oauth-flows/$defs/authorization-code"
+            }
+          },
+          "$ref": "#/$defs/_EXTERNAL/_OPEN_API/specification-extensions",
+          "unevaluatedProperties": false,
+          "$defs": {
+            "implicit": {
+              "type": "object",
+              "properties": {
+                "authorizationUrl": {
+                  "type": "string",
+                  "format": "uri-reference"
+                },
+                "refreshUrl": {
+                  "type": "string",
+                  "format": "uri-reference"
+                },
+                "scopes": {
+                  "$ref": "#/$defs/_EXTERNAL/_OPEN_API/map-of-strings"
+                }
+              },
+              "required": ["authorizationUrl", "scopes"],
+              "$ref": "#/$defs/_EXTERNAL/_OPEN_API/specification-extensions",
+              "unevaluatedProperties": false
+            },
+            "password": {
+              "type": "object",
+              "properties": {
+                "tokenUrl": {
+                  "type": "string",
+                  "format": "uri-reference"
+                },
+                "refreshUrl": {
+                  "type": "string",
+                  "format": "uri-reference"
+                },
+                "scopes": {
+                  "$ref": "#/$defs/_EXTERNAL/_OPEN_API/map-of-strings"
+                }
+              },
+              "required": ["tokenUrl", "scopes"],
+              "$ref": "#/$defs/_EXTERNAL/_OPEN_API/specification-extensions",
+              "unevaluatedProperties": false
+            },
+            "client-credentials": {
+              "type": "object",
+              "properties": {
+                "tokenUrl": {
+                  "type": "string",
+                  "format": "uri-reference"
+                },
+                "refreshUrl": {
+                  "type": "string",
+                  "format": "uri-reference"
+                },
+                "scopes": {
+                  "$ref": "#/$defs/_EXTERNAL/_OPEN_API/map-of-strings"
+                }
+              },
+              "required": ["tokenUrl", "scopes"],
+              "$ref": "#/$defs/_EXTERNAL/_OPEN_API/specification-extensions",
+              "unevaluatedProperties": false
+            },
+            "authorization-code": {
+              "type": "object",
+              "properties": {
+                "authorizationUrl": {
+                  "type": "string",
+                  "format": "uri-reference"
+                },
+                "tokenUrl": {
+                  "type": "string",
+                  "format": "uri-reference"
+                },
+                "refreshUrl": {
+                  "type": "string",
+                  "format": "uri-reference"
+                },
+                "scopes": {
+                  "$ref": "#/$defs/_EXTERNAL/_OPEN_API/map-of-strings"
+                }
+              },
+              "required": ["authorizationUrl", "tokenUrl", "scopes"],
+              "$ref": "#/$defs/_EXTERNAL/_OPEN_API/specification-extensions",
+              "unevaluatedProperties": false
+            }
+          }
+        },
+        "specification-extensions": {
+          "$comment": "https://spec.openapis.org/oas/v3.1#specification-extensions",
+          "patternProperties": {
+            "^x-": true
+          }
+        },
+        "map-of-strings": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "openMicrofrontends": {
+      "type": "string",
+      "pattern": "^1\\.0\\.\\d+(-.+)?$"
+    },
+    "info": {
+      "$ref": "#/$defs/Info"
+    },
+    "securitySchemes": {
+      "$comment": "This schema has been copied over from the OpenAPI schema https://spec.openapis.org/oas/3.1/schema/2025-03-19 and has been modified for our schema",
+      "description": "Section for defining re-usable security schemes for API proxies",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/_EXTERNAL/_OPEN_API/security-scheme-or-reference"
+      }
+    },
+    "servers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Server"
+      }
+    },
+    "microfrontends": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Microfrontend"
+      }
+    }
+  },
+  "required": ["openMicrofrontends", "microfrontends"],
+  "additionalProperties": false
+}
